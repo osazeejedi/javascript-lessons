@@ -1,0 +1,673 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    transition: background 0.5s ease;
+}
+
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 10px;
+    color: white;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.subtitle {
+    font-size: 1.2em;
+    opacity: 0.9;
+}
+
+/* Section styles */
+.concept {
+    margin-bottom: 40px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 5px solid #10b981;
+}
+
+.concept h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.concept p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.concept ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.concept li {
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+/* Example box styles */
+.example-box {
+    background: #ecfdf5;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #10b981;
+    margin: 20px 0;
+}
+
+.example-box h3 {
+    color: #047857;
+    margin-bottom: 10px;
+}
+
+.example-box ul {
+    margin-left: 20px;
+}
+
+.example-box li {
+    margin-bottom: 5px;
+}
+
+/* Code example styles */
+.code-example {
+    background: #2c3e50;
+    color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.code-example h4 {
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.code-example pre {
+    background: #34495e;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 10px 0;
+}
+
+.code-example code {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1em;
+    color: #2ecc71;
+}
+
+/* Inline code */
+code {
+    background: #f1f3f4;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: #d63384;
+    font-size: 0.9em;
+}
+
+/* Interactive demo styles */
+.interactive-demo {
+    background: #fff7ed;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #f59e0b;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.interactive-demo h3 {
+    color: #92400e;
+    margin-bottom: 15px;
+}
+
+/* Input styles */
+.demo-input {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    margin: 5px;
+    width: 150px;
+    transition: border-color 0.3s ease;
+}
+
+.demo-input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.demo-select {
+    padding: 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    margin: 5px;
+    background: white;
+    cursor: pointer;
+}
+
+.demo-select:focus {
+    outline: none;
+    border-color: #10b981;
+}
+
+/* Button styles */
+.demo-button {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin: 10px;
+}
+
+.demo-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.demo-button:active {
+    transform: translateY(0);
+}
+
+.demo-button.small {
+    padding: 8px 16px;
+    font-size: 0.9em;
+}
+
+/* Operators grid */
+.operators-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.operator-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #e5e7eb;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.operator-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    border-color: #10b981;
+}
+
+.operator-card h4 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 1.3em;
+}
+
+.operator-card p {
+    margin-bottom: 10px;
+    color: #6c757d;
+}
+
+.operator-card code {
+    display: block;
+    background: #f8f9fa;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 10px 0;
+    color: #10b981;
+    font-weight: bold;
+}
+
+/* Calculator inputs */
+.calculator-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.operator-symbol {
+    font-size: 2em;
+    color: #10b981;
+}
+
+/* Results grid */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.result-item {
+    background: #f0fdf4;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #10b981;
+}
+
+.result-item h5 {
+    color: #047857;
+    margin-bottom: 5px;
+}
+
+.result-item .result-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #065f46;
+}
+
+/* String buttons */
+.string-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+/* Comparison grid */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.comparison-card {
+    background: #f0f9ff;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #0ea5e9;
+}
+
+.comparison-card h4 {
+    color: #0c4a6e;
+    margin-bottom: 8px;
+}
+
+.comparison-card code {
+    display: block;
+    margin: 5px 0;
+    background: #e0f2fe;
+    color: #0c4a6e;
+}
+
+/* Comparison inputs */
+.comparison-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Calculator project styles */
+.project {
+    background: #f0fdf4;
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid #10b981;
+    margin-bottom: 30px;
+}
+
+.project h2 {
+    color: #047857;
+    margin-bottom: 15px;
+}
+
+.calculator-container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 30px;
+    align-items: start;
+    margin: 20px 0;
+}
+
+.calculator {
+    background: #1f2937;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 300px;
+}
+
+.calculator-display {
+    background: #111827;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: right;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.previous-operand {
+    color: #9ca3af;
+    font-size: 1em;
+    min-height: 1.5em;
+}
+
+.current-operand {
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.calculator-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.calc-btn {
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.calc-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calc-btn:active {
+    transform: translateY(0);
+}
+
+.calc-btn.number {
+    background: #374151;
+    color: white;
+}
+
+.calc-btn.number:hover {
+    background: #4b5563;
+}
+
+.calc-btn.operator {
+    background: #10b981;
+    color: white;
+}
+
+.calc-btn.operator:hover {
+    background: #059669;
+}
+
+.calc-btn.clear {
+    background: #ef4444;
+    color: white;
+}
+
+.calc-btn.clear:hover {
+    background: #dc2626;
+}
+
+.calc-btn.delete {
+    background: #f59e0b;
+    color: white;
+}
+
+.calc-btn.delete:hover {
+    background: #d97706;
+}
+
+.calc-btn.equals {
+    background: #8b5cf6;
+    color: white;
+    grid-row: span 2;
+}
+
+.calc-btn.equals:hover {
+    background: #7c3aed;
+}
+
+.calc-btn.span-two {
+    grid-column: span 2;
+}
+
+.calculator-info {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #10b981;
+}
+
+.calculator-info h4 {
+    color: #047857;
+    margin-bottom: 15px;
+}
+
+.calculator-info ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+}
+
+.calculator-info li {
+    margin-bottom: 5px;
+    color: #065f46;
+}
+
+/* Output styles */
+.output {
+    background: #d1fae5;
+    color: #047857;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-weight: bold;
+    border: 1px solid #10b981;
+}
+
+.mini-output {
+    background: #e2e8f0;
+    color: #475569;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    font-size: 0.9em;
+    min-height: 20px;
+}
+
+/* Hidden class */
+.hidden {
+    display: none;
+}
+
+/* Practice section */
+.practice {
+    background: #eff6ff;
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid #3b82f6;
+    margin-bottom: 30px;
+}
+
+.practice h2 {
+    color: #1e40af;
+    margin-bottom: 15px;
+}
+
+/* Challenge boxes */
+.challenge-box {
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.challenge-box h4 {
+    color: #475569;
+    margin-bottom: 8px;
+}
+
+/* Tip box */
+.tip-box {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.tip-box h4 {
+    color: #92400e;
+    margin-bottom: 8px;
+}
+
+/* Next steps section */
+.next-steps {
+    background: #f0fdf4;
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid #22c55e;
+    margin-bottom: 30px;
+}
+
+.next-steps h2 {
+    color: #15803d;
+    margin-bottom: 15px;
+}
+
+/* Progress bar */
+.progress-bar {
+    background: #e5e7eb;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 20px 0 10px 0;
+}
+
+.progress {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    text-align: center;
+    font-weight: bold;
+    color: #15803d;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        margin: 10px;
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+    
+    .concept {
+        padding: 20px;
+    }
+    
+    .demo-button {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    
+    .demo-input {
+        width: 100%;
+        margin: 5px 0;
+    }
+    
+    .operators-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .calculator-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .calculator {
+        max-width: 100%;
+        margin: 0 auto;
+    }
+    
+    .calculator-inputs {
+        flex-direction: column;
+    }
+    
+    .comparison-inputs {
+        flex-direction: column;
+    }
+}
+
+/* Animation for showing hidden elements */
+.show {
+    display: block;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 6: Functions - Your First Tools</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛠️ Lesson 6: Functions - Your First Tools</h1>
+            <p class="subtitle">Create reusable code blocks that make programming powerful and organized</p>
+        </header>
+
+        <main>
+            <section class="concept">
+                <h2>What are Functions?</h2>
+                <p>Functions are like tools in a toolbox - reusable pieces of code that perform specific tasks. Instead of writing the same code over and over, you create a function once and use it whenever needed!</p>
+                
+                <div class="example-box">
+                    <h3>Real World Example:</h3>
+                    <p><strong>Making Coffee:</strong></p>
+                    <ul>
+                        <li>❌ <strong>Without functions:</strong> Write "grind beans, add water, brew, serve" every time</li>
+                        <li>✅ <strong>With functions:</strong> Create a "makeCoffee()" function and just call it!</li>
+                    </ul>
+                    <p><strong>Functions let you organize code like organizing tools - each has a specific purpose!</strong></p>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Function Declaration - Creating Your Tools</h2>
+                <p>Creating a function is like building a new tool. You define what it does once, then use it many times.</p>
+                
+                <div class="code-example">
+                    <h4>Basic Function Structure:</h4>
+                    <pre><code>function greetUser() {
+    console.log("Hello! Welcome to our website!");
+    return "Greeting complete";
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Function Builder:</h3>
+                    <p>Create and test your own functions:</p>
+                    <div class="function-builder">
+                        <div class="builder-row">
+                            <label>Function Name:</label>
+                            <input type="text" id="func-name" placeholder="myFunction" class="demo-input">
+                        </div>
+                        <div class="builder-row">
+                            <label>Message to Display:</label>
+                            <input type="text" id="func-message" placeholder="Hello World!" class="demo-input">
+                        </div>
+                        <div class="builder-row">
+                            <label>Return Value:</label>
+                            <input type="text" id="func-return" placeholder="Success!" class="demo-input">
+                        </div>
+                        <button class="demo-button" onclick="createFunction()">Create Function</button>
+                        <button class="demo-button secondary" onclick="callCreatedFunction()">Call Function</button>
+                    </div>
+                    <div id="function-output" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Parameters - Giving Tools Information</h2>
+                <p>Parameters are like settings on a tool - they let you customize how the function works each time you use it.</p>
+                
+                <div class="code-example">
+                    <h4>Function with Parameters:</h4>
+                    <pre><code>function greetPerson(name, age) {
+    console.log(`Hello ${name}! You are ${age} years old.`);
+    return `Greeted ${name}`;
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Personal Greeting Generator:</h3>
+                    <p>See how parameters make functions flexible:</p>
+                    <div class="greeting-demo">
+                        <input type="text" id="user-name" placeholder="Your name" class="demo-input">
+                        <input type="number" id="user-age" placeholder="Your age" class="demo-input" min="1" max="120">
+                        <select id="greeting-style" class="demo-select">
+                            <option value="formal">Formal</option>
+                            <option value="casual">Casual</option>
+                            <option value="funny">Funny</option>
+                            <option value="professional">Professional</option>
+                        </select>
+                        <button class="demo-button" onclick="generateGreeting()">Generate Greeting</button>
+                    </div>
+                    <div id="greeting-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Return Values - Getting Results Back</h2>
+                <p>Return values are like the output of a tool - the result you get after the function does its work.</p>
+                
+                <div class="code-example">
+                    <h4>Functions that Return Values:</h4>
+                    <pre><code>function addNumbers(a, b) {
+    const result = a + b;
+    return result; // Send the result back
+}
+
+const sum = addNumbers(5, 3); // sum = 8</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Math Function Laboratory:</h3>
+                    <p>Test different math functions and see their return values:</p>
+                    <div class="math-lab">
+                        <div class="lab-row">
+                            <input type="number" id="num1" placeholder="First number" class="demo-input small">
+                            <input type="number" id="num2" placeholder="Second number" class="demo-input small">
+                            <select id="math-operation" class="demo-select">
+                                <option value="add">Add (+)</option>
+                                <option value="subtract">Subtract (-)</option>
+                                <option value="multiply">Multiply (×)</option>
+                                <option value="divide">Divide (÷)</option>
+                                <option value="power">Power (^)</option>
+                                <option value="max">Maximum</option>
+                                <option value="min">Minimum</option>
+                            </select>
+                            <button class="demo-button" onclick="performMathOperation()">Calculate</button>
+                        </div>
+                    </div>
+                    <div id="math-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Arrow Functions - Modern Syntax</h2>
+                <p>Arrow functions are a shorter, modern way to write functions. They're like compact tools that do the same job!</p>
+                
+                <div class="code-example">
+                    <h4>Arrow Function Syntax:</h4>
+                    <pre><code>// Traditional function
+function double(x) {
+    return x * 2;
+}
+
+// Arrow function (shorter!)
+const double = (x) => x * 2;
+
+// Even shorter for single parameter
+const double = x => x * 2;</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Function Style Converter:</h3>
+                    <p>See the same function written in different styles:</p>
+                    <div class="converter-demo">
+                        <select id="function-example" class="demo-select">
+                            <option value="square">Square a Number</option>
+                            <option value="greet">Greet Someone</option>
+                            <option value="isEven">Check if Even</option>
+                            <option value="getLength">Get String Length</option>
+                        </select>
+                        <button class="demo-button" onclick="showFunctionStyles()">Show All Styles</button>
+                    </div>
+                    <div id="function-styles" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Scope - Where Variables Live</h2>
+                <p>Scope determines where variables can be used. It's like having different toolboxes for different rooms!</p>
+                
+                <div class="scope-grid">
+                    <div class="scope-card">
+                        <h4>Global Scope</h4>
+                        <p>Variables available everywhere</p>
+                        <code>let globalVar = "I'm everywhere!";</code>
+                        <p class="example">Like a tool you carry with you</p>
+                    </div>
+                    
+                    <div class="scope-card">
+                        <h4>Function Scope</h4>
+                        <p>Variables only inside the function</p>
+                        <code>function test() { let localVar = "Only here!"; }</code>
+                        <p class="example">Like tools in a specific toolbox</p>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Scope Visualizer:</h3>
+                    <p>See how variables behave in different scopes:</p>
+                    <div class="scope-demo">
+                        <button class="demo-button" onclick="demonstrateScope()">Run Scope Demo</button>
+                        <button class="demo-button secondary" onclick="clearScopeDemo()">Clear</button>
+                    </div>
+                    <div id="scope-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="project">
+                <h2>🎯 Major Project: Personal Toolkit Library</h2>
+                <p>Build your own collection of useful functions that you can reuse in future projects!</p>
+                
+                <div class="toolkit-container">
+                    <div class="toolkit-sidebar">
+                        <h3>🧰 Your Toolkit</h3>
+                        <div class="tool-categories">
+                            <div class="category">
+                                <h4>Text Tools</h4>
+                                <button class="tool-btn" onclick="addTextTool('capitalize')">📝 Capitalize Text</button>
+                                <button class="tool-btn" onclick="addTextTool('reverse')">🔄 Reverse Text</button>
+                                <button class="tool-btn" onclick="addTextTool('wordCount')">📊 Count Words</button>
+                                <button class="tool-btn" onclick="addTextTool('removeSpaces')">✂️ Remove Spaces</button>
+                            </div>
+                            
+                            <div class="category">
+                                <h4>Number Tools</h4>
+                                <button class="tool-btn" onclick="addNumberTool('random')">🎲 Random Number</button>
+                                <button class="tool-btn" onclick="addNumberTool('factorial')">🔢 Factorial</button>
+                                <button class="tool-btn" onclick="addNumberTool('isPrime')">🔍 Is Prime?</button>
+                                <button class="tool-btn" onclick="addNumberTool('fibonacci')">🌀 Fibonacci</button>
+                            </div>
+                            
+                            <div class="category">
+                                <h4>Array Tools</h4>
+                                <button class="tool-btn" onclick="addArrayTool('shuffle')">🔀 Shuffle Array</button>
+                                <button class="tool-btn" onclick="addArrayTool('unique')">✨ Remove Duplicates</button>
+                                <button class="tool-btn" onclick="addArrayTool('average')">📈 Calculate Average</button>
+                                <button class="tool-btn" onclick="addArrayTool('sort')">📋 Smart Sort</button>
+                            </div>
+                            
+                            <div class="category">
+                                <h4>Validation Tools</h4>
+                                <button class="tool-btn" onclick="addValidationTool('email')">📧 Validate Email</button>
+                                <button class="tool-btn" onclick="addValidationTool('password')">🔒 Check Password</button>
+                                <button class="tool-btn" onclick="addValidationTool('phone')">📱 Validate Phone</button>
+                                <button class="tool-btn" onclick="addValidationTool('url')">🌐 Validate URL</button>
+                            </div>
+                        </div>
+                        
+                        <div class="toolkit-actions">
+                            <button class="tool-btn secondary" onclick="clearToolkit()">🧹 Clear All</button>
+                            <button class="tool-btn secondary" onclick="exportToolkit()">💾 Export Code</button>
+                            <button class="tool-btn secondary" onclick="importToolkit()">📥 Import Code</button>
+                        </div>
+                    </div>
+                    
+                    <div class="toolkit-main">
+                        <div class="toolkit-header">
+                            <h3>🔧 Function Tester</h3>
+                            <div class="toolkit-stats">
+                                <span>Functions: <span id="function-count">0</span></span>
+                                <span>Lines of Code: <span id="code-lines">0</span></span>
+                            </div>
+                        </div>
+                        
+                        <div class="function-tester">
+                            <div class="tester-input">
+                                <label>Test Input:</label>
+                                <input type="text" id="test-input" placeholder="Enter test data" class="demo-input">
+                                <button class="demo-button" onclick="testSelectedFunction()">Test Function</button>
+                            </div>
+                            <div id="test-output" class="test-output">
+                                <p>Select a function from your toolkit to test it!</p>
+                            </div>
+                        </div>
+                        
+                        <div class="code-display">
+                            <h4>📜 Your Function Library:</h4>
+                            <div id="function-library" class="function-library">
+                                <p class="empty-state">Your toolkit is empty. Add some functions to get started!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-info">
+                    <h4>🔧 Function Concepts Used:</h4>
+                    <ul>
+                        <li>✅ <strong>Function Declaration</strong> - Creating reusable tools</li>
+                        <li>✅ <strong>Parameters</strong> - Customizing function behavior</li>
+                        <li>✅ <strong>Return Values</strong> - Getting results back</li>
+                        <li>✅ <strong>Arrow Functions</strong> - Modern syntax</li>
+                        <li>✅ <strong>Higher-Order Functions</strong> - Functions using other functions</li>
+                        <li>✅ <strong>Error Handling</strong> - Making functions robust</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="practice">
+                <h2>🎯 Practice Challenges</h2>
+                <p>Test your function mastery with these interactive challenges:</p>
+                
+                <div class="challenge-grid">
+                    <div class="challenge-box">
+                        <h4>Challenge 1: Temperature Converter</h4>
+                        <p>Create functions to convert between temperature scales:</p>
+                        <div class="temp-demo">
+                            <input type="number" id="temp-input" placeholder="Temperature" class="demo-input small">
+                            <select id="temp-from" class="demo-select small">
+                                <option value="celsius">Celsius</option>
+                                <option value="fahrenheit">Fahrenheit</option>
+                                <option value="kelvin">Kelvin</option>
+                            </select>
+                            <span>to</span>
+                            <select id="temp-to" class="demo-select small">
+                                <option value="fahrenheit">Fahrenheit</option>
+                                <option value="celsius">Celsius</option>
+                                <option value="kelvin">Kelvin</option>
+                            </select>
+                            <button class="demo-button small" onclick="convertTemperature()">Convert</button>
+                            <div id="temp-result" class="mini-output"></div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-box">
+                        <h4>Challenge 2: Password Generator</h4>
+                        <p>Build a function that creates secure passwords:</p>
+                        <div class="password-demo">
+                            <input type="number" id="password-length" placeholder="Length" class="demo-input small" value="12" min="4" max="50">
+                            <label><input type="checkbox" id="include-numbers" checked> Numbers</label>
+                            <label><input type="checkbox" id="include-symbols" checked> Symbols</label>
+                            <button class="demo-button small" onclick="generatePassword()">Generate</button>
+                            <div id="password-result" class="mini-output"></div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-box">
+                        <h4>Challenge 3: Grade Calculator</h4>
+                        <p>Create a function that calculates letter grades:</p>
+                        <div class="grade-demo">
+                            <input type="number" id="grade-score" placeholder="Score (0-100)" class="demo-input small" min="0" max="100">
+                            <button class="demo-button small" onclick="calculateGrade()">Get Grade</button>
+                            <div id="grade-result" class="mini-output"></div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-box">
+                        <h4>Challenge 4: Text Analyzer</h4>
+                        <p>Analyze text with multiple functions:</p>
+                        <div class="text-demo">
+                            <textarea id="analyze-text" placeholder="Enter text to analyze..." class="demo-textarea"></textarea>
+                            <button class="demo-button small" onclick="analyzeText()">Analyze</button>
+                            <div id="text-result" class="mini-output"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Function Mastery Tips:</h4>
+                    <ul>
+                        <li>Keep functions small and focused on one task</li>
+                        <li>Use descriptive names that explain what the function does</li>
+                        <li>Always return a value when it makes sense</li>
+                        <li>Handle edge cases and invalid inputs gracefully</li>
+                        <li>Document your functions with comments</li>
+                        <li>Test your functions with different inputs</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="next-steps">
+                <h2>What's Next?</h2>
+                <p>In Lesson 7, you'll learn about <strong>Arrays</strong> - how to store and work with lists of data efficiently!</p>
+                
+                <div class="progress-bar">
+                    <div class="progress" style="width: 30%"></div>
+                </div>
+                <p class="progress-text">Progress: 6/20 lessons complete (30%)</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Functions are the building blocks of great programs! 🛠️⚡</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

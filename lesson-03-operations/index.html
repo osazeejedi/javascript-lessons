@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 3: Basic Operations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧮 Lesson 3: Basic Operations</h1>
+            <p class="subtitle">Master math, strings, and comparisons to build powerful programs</p>
+        </header>
+
+        <main>
+            <section class="concept">
+                <h2>Mathematical Operations</h2>
+                <p>Just like in real life, computers can do math! JavaScript provides several operators to perform calculations with numbers.</p>
+                
+                <div class="example-box">
+                    <h3>Real World Example:</h3>
+                    <p><strong>Shopping Cart Calculations:</strong></p>
+                    <ul>
+                        <li>🛒 Item price: $15.99</li>
+                        <li>📦 Quantity: 3 items</li>
+                        <li>💰 Total: $15.99 × 3 = $47.97</li>
+                        <li>🎯 Tax (8%): $47.97 × 0.08 = $3.84</li>
+                        <li>💳 Final total: $47.97 + $3.84 = $51.81</li>
+                    </ul>
+                    <p><strong>JavaScript does the same math!</strong></p>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Basic Math Operators</h2>
+                <p>JavaScript provides these essential math operators:</p>
+                
+                <div class="operators-grid">
+                    <div class="operator-card">
+                        <h4>➕ Addition (+)</h4>
+                        <p>Adds numbers together</p>
+                        <code>5 + 3 = 8</code>
+                        <button class="demo-button small" onclick="demonstrateAddition()">Try It</button>
+                        <p id="addition-demo" class="mini-output"></p>
+                    </div>
+
+                    <div class="operator-card">
+                        <h4>➖ Subtraction (-)</h4>
+                        <p>Subtracts one number from another</p>
+                        <code>10 - 4 = 6</code>
+                        <button class="demo-button small" onclick="demonstrateSubtraction()">Try It</button>
+                        <p id="subtraction-demo" class="mini-output"></p>
+                    </div>
+
+                    <div class="operator-card">
+                        <h4>✖️ Multiplication (*)</h4>
+                        <p>Multiplies numbers</p>
+                        <code>6 * 7 = 42</code>
+                        <button class="demo-button small" onclick="demonstrateMultiplication()">Try It</button>
+                        <p id="multiplication-demo" class="mini-output"></p>
+                    </div>
+
+                    <div class="operator-card">
+                        <h4>➗ Division (/)</h4>
+                        <p>Divides one number by another</p>
+                        <code>15 / 3 = 5</code>
+                        <button class="demo-button small" onclick="demonstrateDivision()">Try It</button>
+                        <p id="division-demo" class="mini-output"></p>
+                    </div>
+
+                    <div class="operator-card">
+                        <h4>📐 Modulus (%)</h4>
+                        <p>Gets the remainder after division</p>
+                        <code>17 % 5 = 2</code>
+                        <button class="demo-button small" onclick="demonstrateModulus()">Try It</button>
+                        <p id="modulus-demo" class="mini-output"></p>
+                    </div>
+
+                    <div class="operator-card">
+                        <h4>🔢 Exponentiation (**)</h4>
+                        <p>Raises a number to a power</p>
+                        <code>2 ** 3 = 8</code>
+                        <button class="demo-button small" onclick="demonstrateExponent()">Try It</button>
+                        <p id="exponent-demo" class="mini-output"></p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Interactive Math Playground</h2>
+                <p>Try your own calculations! Enter two numbers and see all operations in action:</p>
+                
+                <div class="interactive-demo">
+                    <h3>Math Calculator:</h3>
+                    <div class="calculator-inputs">
+                        <input type="number" id="num1" placeholder="First number" class="demo-input" value="10">
+                        <span class="operator-symbol">🧮</span>
+                        <input type="number" id="num2" placeholder="Second number" class="demo-input" value="3">
+                        <button id="calculate-btn" class="demo-button">Calculate All</button>
+                    </div>
+                    <div id="math-results" class="results-grid hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>String Operations</h2>
+                <p>Strings (text) have their own special operations. You can combine them, change their case, and extract parts!</p>
+                
+                <div class="code-example">
+                    <h4>String Operations:</h4>
+                    <pre><code>let firstName = "John";
+let lastName = "Doe";
+let fullName = firstName + " " + lastName;  // "John Doe"
+let upperName = fullName.toUpperCase();     // "JOHN DOE"
+let nameLength = fullName.length;           // 8</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>String Manipulation Lab:</h3>
+                    <input type="text" id="string-input" placeholder="Enter some text" class="demo-input" value="Hello World">
+                    <div class="string-buttons">
+                        <button class="demo-button small" onclick="showStringLength()">Length</button>
+                        <button class="demo-button small" onclick="showUpperCase()">UPPERCASE</button>
+                        <button class="demo-button small" onclick="showLowerCase()">lowercase</button>
+                        <button class="demo-button small" onclick="showFirstChar()">First Char</button>
+                        <button class="demo-button small" onclick="showLastChar()">Last Char</button>
+                    </div>
+                    <div id="string-results" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Comparison Operations</h2>
+                <p>Sometimes you need to compare values to make decisions. JavaScript provides comparison operators that return true or false:</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-card">
+                        <h4>Greater Than (>)</h4>
+                        <code>10 > 5 → true</code>
+                        <code>3 > 8 → false</code>
+                    </div>
+                    <div class="comparison-card">
+                        <h4>Less Than (<)</h4>
+                        <code>5 < 10 → true</code>
+                        <code>8 < 3 → false</code>
+                    </div>
+                    <div class="comparison-card">
+                        <h4>Equal To (==)</h4>
+                        <code>5 == 5 → true</code>
+                        <code>5 == "5" → true</code>
+                    </div>
+                    <div class="comparison-card">
+                        <h4>Strictly Equal (===)</h4>
+                        <code>5 === 5 → true</code>
+                        <code>5 === "5" → false</code>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Comparison Tester:</h3>
+                    <div class="comparison-inputs">
+                        <input type="text" id="compare1" placeholder="First value" class="demo-input" value="10">
+                        <select id="operator" class="demo-select">
+                            <option value=">">></option>
+                            <option value="<"><</option>
+                            <option value=">=">=</option>
+                            <option value="<="><=</option>
+                            <option value="==">=</option>
+                            <option value="===">=== (strict)</option>
+                            <option value="!=">!=</option>
+                            <option value="!==">!== (strict)</option>
+                        </select>
+                        <input type="text" id="compare2" placeholder="Second value" class="demo-input" value="5">
+                        <button id="compare-btn" class="demo-button">Compare</button>
+                    </div>
+                    <div id="comparison-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="project">
+                <h2>🎯 Major Project: Calculator App</h2>
+                <p>Let's build a real calculator using everything we've learned! This calculator will perform all basic math operations with a beautiful interface.</p>
+                
+                <div class="calculator-container">
+                    <div class="calculator">
+                        <div class="calculator-display">
+                            <div id="calc-previous" class="previous-operand"></div>
+                            <div id="calc-current" class="current-operand">0</div>
+                        </div>
+                        <div class="calculator-buttons">
+                            <button class="calc-btn clear" onclick="calculator.clear()">AC</button>
+                            <button class="calc-btn delete" onclick="calculator.delete()">DEL</button>
+                            <button class="calc-btn operator" onclick="calculator.chooseOperation('/')" data-operation="/">÷</button>
+                            <button class="calc-btn operator" onclick="calculator.chooseOperation('*')" data-operation="*">×</button>
+                            
+                            <button class="calc-btn number" onclick="calculator.appendNumber('7')" data-number="7">7</button>
+                            <button class="calc-btn number" onclick="calculator.appendNumber('8')" data-number="8">8</button>
+                            <button class="calc-btn number" onclick="calculator.appendNumber('9')" data-number="9">9</button>
+                            <button class="calc-btn operator" onclick="calculator.chooseOperation('-')" data-operation="-">-</button>
+                            
+                            <button class="calc-btn number" onclick="calculator.appendNumber('4')" data-number="4">4</button>
+                            <button class="calc-btn number" onclick="calculator.appendNumber('5')" data-number="5">5</button>
+                            <button class="calc-btn number" onclick="calculator.appendNumber('6')" data-number="6">6</button>
+                            <button class="calc-btn operator" onclick="calculator.chooseOperation('+')" data-operation="+">+</button>
+                            
+                            <button class="calc-btn number" onclick="calculator.appendNumber('1')" data-number="1">1</button>
+                            <button class="calc-btn number" onclick="calculator.appendNumber('2')" data-number="2">2</button>
+                            <button class="calc-btn number" onclick="calculator.appendNumber('3')" data-number="3">3</button>
+                            <button class="calc-btn equals span-two" onclick="calculator.compute()" rowspan="2">=</button>
+                            
+                            <button class="calc-btn number span-two" onclick="calculator.appendNumber('0')" data-number="0">0</button>
+                            <button class="calc-btn number" onclick="calculator.appendNumber('.')" data-number=".">.</button>
+                        </div>
+                    </div>
+                    
+                    <div class="calculator-info">
+                        <h4>🎉 You Built This!</h4>
+                        <p>This calculator uses:</p>
+                        <ul>
+                            <li>✅ Addition, subtraction, multiplication, division</li>
+                            <li>✅ Decimal number support</li>
+                            <li>✅ Clear and delete functions</li>
+                            <li>✅ Error handling</li>
+                            <li>✅ Beautiful responsive design</li>
+                        </ul>
+                        <p><strong>Try it out!</strong> Perform some calculations and see JavaScript math operations in action.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="practice">
+                <h2>🎯 Practice Exercises</h2>
+                <p>Test your understanding with these challenges:</p>
+                
+                <div class="challenge-box">
+                    <h4>Challenge 1: Order of Operations</h4>
+                    <p>What is the result of: <code>2 + 3 * 4</code>? Try it in the console!</p>
+                    <button class="demo-button small" onclick="showOrderOfOperations()">Show Answer</button>
+                    <p id="order-result" class="mini-output hidden"></p>
+                </div>
+
+                <div class="challenge-box">
+                    <h4>Challenge 2: String Combination</h4>
+                    <p>Create a variable with your full name by combining first and last name variables.</p>
+                </div>
+
+                <div class="challenge-box">
+                    <h4>Challenge 3: Age Comparison</h4>
+                    <p>Use comparison operators to check if someone is old enough to vote (18 or older).</p>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Pro Tip:</h4>
+                    <p>Use parentheses to control the order of operations: <code>(2 + 3) * 4 = 20</code> vs <code>2 + 3 * 4 = 14</code></p>
+                </div>
+            </section>
+
+            <section class="next-steps">
+                <h2>What's Next?</h2>
+                <p>In Lesson 4, you'll learn about <strong>conditionals</strong> - how to make your programs smart by making decisions based on different conditions!</p>
+                
+                <div class="progress-bar">
+                    <div class="progress" style="width: 15%"></div>
+                </div>
+                <p class="progress-text">Progress: 3/20 lessons complete (15%)</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Math is the foundation of programming! 🧮</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

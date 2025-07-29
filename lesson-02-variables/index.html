@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 2: Variables and Data Types</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📦 Lesson 2: Variables and Data Types</h1>
+            <p class="subtitle">Learn how to store and use information in your programs</p>
+        </header>
+
+        <main>
+            <section class="concept">
+                <h2>What are Variables?</h2>
+                <p>Think of variables as labeled boxes where you can store information. Just like you might have a box labeled "Photos" to store your pictures, variables have names and store data.</p>
+                
+                <div class="example-box">
+                    <h3>Real World Example:</h3>
+                    <p><strong>Physical Storage:</strong></p>
+                    <ul>
+                        <li>📦 Box labeled "Books" → Contains your books</li>
+                        <li>📦 Box labeled "Clothes" → Contains your clothes</li>
+                        <li>📦 Box labeled "Games" → Contains your games</li>
+                    </ul>
+                    <p><strong>JavaScript Variables:</strong></p>
+                    <ul>
+                        <li>📦 Variable named "userName" → Contains "John"</li>
+                        <li>📦 Variable named "age" → Contains 25</li>
+                        <li>📦 Variable named "isLoggedIn" → Contains true</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Creating Variables</h2>
+                <p>In JavaScript, we create variables using the <code>let</code> keyword:</p>
+                
+                <div class="code-example">
+                    <h4>Basic Variable Creation:</h4>
+                    <pre><code>let userName = "Alice";
+let age = 28;
+let isStudent = true;</code></pre>
+                    <p>This creates three "boxes" with different types of information!</p>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Try creating your own variable:</h3>
+                    <input type="text" id="name-input" placeholder="Enter your name" class="demo-input">
+                    <button id="create-variable-btn" class="demo-button">Create Variable</button>
+                    <p id="variable-output" class="output hidden"></p>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Data Types: Different Kinds of Information</h2>
+                <p>Just like real boxes can hold different types of items, variables can store different types of data:</p>
+
+                <div class="data-types-grid">
+                    <div class="data-type-card">
+                        <h4>🔢 Numbers</h4>
+                        <p>For counting, math, ages, prices</p>
+                        <code>let score = 100;</code>
+                        <div class="interactive-demo">
+                            <button class="demo-button small" onclick="demonstrateNumber()">Try Numbers</button>
+                            <p id="number-demo" class="mini-output"></p>
+                        </div>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>📝 Strings (Text)</h4>
+                        <p>For names, messages, descriptions</p>
+                        <code>let message = "Hello!";</code>
+                        <div class="interactive-demo">
+                            <button class="demo-button small" onclick="demonstrateString()">Try Strings</button>
+                            <p id="string-demo" class="mini-output"></p>
+                        </div>
+                    </div>
+
+                    <div class="data-type-card">
+                        <h4>✅ Booleans (True/False)</h4>
+                        <p>For yes/no, on/off, true/false</p>
+                        <code>let isReady = true;</code>
+                        <div class="interactive-demo">
+                            <button class="demo-button small" onclick="demonstrateBoolean()">Try Booleans</button>
+                            <p id="boolean-demo" class="mini-output"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Using Variables</h2>
+                <p>Once you store information in a variable, you can use it anywhere in your program:</p>
+                
+                <div class="code-example">
+                    <h4>Using Variables:</h4>
+                    <pre><code>let firstName = "Sarah";
+let lastName = "Johnson";
+let fullName = firstName + " " + lastName;
+console.log("Hello, " + fullName + "!");</code></pre>
+                    <p>This combines variables to create new information!</p>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Build Your Own Greeting:</h3>
+                    <input type="text" id="first-name" placeholder="First name" class="demo-input">
+                    <input type="text" id="last-name" placeholder="Last name" class="demo-input">
+                    <input type="number" id="user-age" placeholder="Age" class="demo-input">
+                    <button id="build-greeting-btn" class="demo-button">Build Greeting</button>
+                    <p id="greeting-output" class="output hidden"></p>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Changing Variables</h2>
+                <p>Variables can change their values - that's why they're called "variables"!</p>
+                
+                <div class="code-example">
+                    <h4>Changing Values:</h4>
+                    <pre><code>let score = 0;        // Start with 0
+score = 10;           // Change to 10
+score = score + 5;    // Add 5, now it's 15</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Score Counter:</h3>
+                    <p>Current Score: <span id="current-score">0</span></p>
+                    <button id="add-points-btn" class="demo-button">Add 10 Points</button>
+                    <button id="reset-score-btn" class="demo-button">Reset Score</button>
+                </div>
+            </section>
+
+            <section class="project">
+                <h2>🎯 Mini Project: Personal Info Card</h2>
+                <p>Let's build something cool! Create your own personal information card using variables:</p>
+                
+                <div class="project-form">
+                    <h3>Enter Your Information:</h3>
+                    <input type="text" id="project-name" placeholder="Your name" class="demo-input">
+                    <input type="number" id="project-age" placeholder="Your age" class="demo-input">
+                    <input type="text" id="project-hobby" placeholder="Your favorite hobby" class="demo-input">
+                    <input type="text" id="project-color" placeholder="Your favorite color" class="demo-input">
+                    <button id="create-card-btn" class="demo-button">Create My Card</button>
+                </div>
+
+                <div id="info-card" class="info-card hidden">
+                    <h3>🎉 Your Personal Info Card</h3>
+                    <div id="card-content"></div>
+                </div>
+            </section>
+
+            <section class="practice">
+                <h2>🎯 Practice Exercise</h2>
+                <p>Try these challenges to test your understanding:</p>
+                
+                <div class="challenge-box">
+                    <h4>Challenge 1: Variable Detective</h4>
+                    <p>Open the console and look for the variables we created. Can you see their values?</p>
+                </div>
+
+                <div class="challenge-box">
+                    <h4>Challenge 2: Math with Variables</h4>
+                    <p>Create two number variables and add them together. Display the result!</p>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Pro Tip:</h4>
+                    <p>Variable names should be descriptive! Use <code>userName</code> instead of <code>x</code>, and <code>totalPrice</code> instead of <code>tp</code>.</p>
+                </div>
+            </section>
+
+            <section class="next-steps">
+                <h2>What's Next?</h2>
+                <p>In Lesson 3, you'll learn about <strong>basic operations</strong> - how to do math, combine text, and compare values using your variables!</p>
+                
+                <div class="progress-bar">
+                    <div class="progress" style="width: 10%"></div>
+                </div>
+                <p class="progress-text">Progress: 2/20 lessons complete (10%)</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Variables are the building blocks of programming! 🧱</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 4: Making Decisions (Conditionals)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤔 Lesson 4: Making Decisions (Conditionals)</h1>
+            <p class="subtitle">Learn how to make your programs smart with if/else statements</p>
+        </header>
+
+        <main>
+            <section class="concept">
+                <h2>What are Conditionals?</h2>
+                <p>Conditionals allow your programs to make decisions based on different situations. Just like you make decisions in real life, your code can choose different paths based on conditions.</p>
+                
+                <div class="example-box">
+                    <h3>Real World Example:</h3>
+                    <p><strong>Getting Dressed in the Morning:</strong></p>
+                    <ul>
+                        <li>🌧️ <strong>If</strong> it's raining → Take an umbrella</li>
+                        <li>☀️ <strong>Else if</strong> it's sunny → Wear sunglasses</li>
+                        <li>❄️ <strong>Else if</strong> it's cold → Wear a jacket</li>
+                        <li>🌤️ <strong>Else</strong> → Wear normal clothes</li>
+                    </ul>
+                    <p><strong>JavaScript makes the same kind of decisions!</strong></p>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>If Statements</h2>
+                <p>The most basic conditional statement. It runs code only if a condition is true.</p>
+                
+                <div class="code-example">
+                    <h4>Basic If Statement:</h4>
+                    <pre><code>if (condition) {
+    // Code runs only if condition is true
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Age Verification Demo:</h3>
+                    <p>Enter your age to see if you can vote:</p>
+                    <input type="number" id="age-input" placeholder="Enter your age" class="demo-input" value="20">
+                    <button class="demo-button" onclick="checkVotingAge()">Check Voting Eligibility</button>
+                    <div id="voting-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>If-Else Statements</h2>
+                <p>When you want to do one thing if a condition is true, and something else if it's false.</p>
+                
+                <div class="code-example">
+                    <h4>If-Else Structure:</h4>
+                    <pre><code>if (condition) {
+    // Code runs if condition is true
+} else {
+    // Code runs if condition is false
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Password Strength Checker:</h3>
+                    <p>Enter a password to check if it's strong enough:</p>
+                    <input type="password" id="password-input" placeholder="Enter password" class="demo-input">
+                    <button class="demo-button" onclick="checkPasswordStrength()">Check Password</button>
+                    <div id="password-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Multiple Conditions (Else If)</h2>
+                <p>When you have more than two possible outcomes, use else if to check multiple conditions.</p>
+                
+                <div class="code-example">
+                    <h4>Multiple Conditions:</h4>
+                    <pre><code>if (condition1) {
+    // First option
+} else if (condition2) {
+    // Second option
+} else if (condition3) {
+    // Third option
+} else {
+    // Default option
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Grade Calculator:</h3>
+                    <p>Enter a test score (0-100) to get your letter grade:</p>
+                    <input type="number" id="score-input" placeholder="Enter score (0-100)" class="demo-input" min="0" max="100" value="85">
+                    <button class="demo-button" onclick="calculateGrade()">Get Letter Grade</button>
+                    <div id="grade-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Logical Operators</h2>
+                <p>Combine multiple conditions using logical operators to create more complex decision-making.</p>
+                
+                <div class="operators-grid">
+                    <div class="operator-card">
+                        <h4>AND (&&)</h4>
+                        <p>Both conditions must be true</p>
+                        <code>age >= 18 && hasLicense</code>
+                        <p class="example">Can drive if 18+ AND has license</p>
+                    </div>
+                    
+                    <div class="operator-card">
+                        <h4>OR (||)</h4>
+                        <p>At least one condition must be true</p>
+                        <code>isWeekend || isHoliday</code>
+                        <p class="example">No work if weekend OR holiday</p>
+                    </div>
+                    
+                    <div class="operator-card">
+                        <h4>NOT (!)</h4>
+                        <p>Reverses the condition</p>
+                        <code>!isRaining</code>
+                        <p class="example">Go outside if NOT raining</p>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Movie Theater Access:</h3>
+                    <p>Check if someone can watch different movie ratings:</p>
+                    <div class="movie-inputs">
+                        <input type="number" id="viewer-age" placeholder="Age" class="demo-input small" value="16">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="has-parent"> With Parent/Guardian
+                        </label>
+                        <button class="demo-button" onclick="checkMovieAccess()">Check Movie Access</button>
+                    </div>
+                    <div id="movie-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Switch Statements</h2>
+                <p>When you have many possible values for a single variable, switch statements can be cleaner than multiple if-else statements.</p>
+                
+                <div class="code-example">
+                    <h4>Switch Statement Structure:</h4>
+                    <pre><code>switch (variable) {
+    case 'value1':
+        // Code for value1
+        break;
+    case 'value2':
+        // Code for value2
+        break;
+    default:
+        // Default code
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Day of the Week Planner:</h3>
+                    <p>Select a day to see the recommended activity:</p>
+                    <select id="day-select" class="demo-select">
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <option value="saturday">Saturday</option>
+                        <option value="sunday">Sunday</option>
+                    </select>
+                    <button class="demo-button" onclick="planDay()">Get Day Plan</button>
+                    <div id="day-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="project">
+                <h2>🎯 Major Project: Interactive Adventure Game</h2>
+                <p>Let's build a "Choose Your Own Adventure" game using everything we've learned about conditionals!</p>
+                
+                <div class="game-container">
+                    <div class="game-screen">
+                        <div class="game-header">
+                            <h3>🏰 The Mysterious Castle</h3>
+                            <div class="game-stats">
+                                <span id="health">❤️ Health: 100</span>
+                                <span id="score">⭐ Score: 0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="story-area">
+                            <div id="story-text" class="story-text">
+                                Welcome, brave adventurer! You stand before a mysterious castle. Dark clouds gather overhead, and you hear strange sounds from within. What do you choose to do?
+                            </div>
+                            
+                            <div class="story-image">
+                                <div class="castle-emoji">🏰</div>
+                            </div>
+                        </div>
+                        
+                        <div class="choices-area">
+                            <div id="choices" class="choices">
+                                <button class="choice-btn" onclick="makeChoice('enter')">🚪 Enter the castle</button>
+                                <button class="choice-btn" onclick="makeChoice('around')">🌲 Walk around the castle</button>
+                                <button class="choice-btn" onclick="makeChoice('leave')">🏃 Leave immediately</button>
+                            </div>
+                        </div>
+                        
+                        <div class="game-controls">
+                            <button class="control-btn" onclick="restartGame()">🔄 Restart Game</button>
+                            <button class="control-btn" onclick="showGameCode()">👨‍💻 View Code</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-info">
+                        <h4>🎮 Game Features:</h4>
+                        <ul>
+                            <li>✅ Multiple story paths using if/else statements</li>
+                            <li>✅ Health and score tracking with conditionals</li>
+                            <li>✅ Random events using logical operators</li>
+                            <li>✅ Switch statements for different scenarios</li>
+                            <li>✅ Complex decision trees</li>
+                            <li>✅ Dynamic story generation</li>
+                        </ul>
+                        <p><strong>Play the game!</strong> Each choice uses conditionals to determine what happens next.</p>
+                    </div>
+                </div>
+                
+                <div id="game-code" class="code-display hidden">
+                    <h4>Game Logic Example:</h4>
+                    <pre><code>function makeChoice(choice) {
+    if (choice === 'enter') {
+        if (playerHealth > 50) {
+            // Brave enough to enter
+            showStory("You push open the heavy door...");
+        } else {
+            // Too weak to enter
+            showStory("You're too weak to push the door...");
+        }
+    } else if (choice === 'around') {
+        // Explore around the castle
+        let randomEvent = Math.random();
+        if (randomEvent > 0.5) {
+            // Good outcome
+            increaseScore(10);
+        } else {
+            // Bad outcome
+            decreaseHealth(10);
+        }
+    } else {
+        // Leave the castle
+        showStory("You decide discretion is the better part of valor...");
+    }
+}</code></pre>
+                </div>
+            </section>
+
+            <section class="practice">
+                <h2>🎯 Practice Exercises</h2>
+                <p>Test your understanding with these challenges:</p>
+                
+                <div class="challenge-grid">
+                    <div class="challenge-box">
+                        <h4>Challenge 1: Traffic Light</h4>
+                        <p>Create a program that tells drivers what to do based on traffic light colors:</p>
+                        <div class="traffic-demo">
+                            <select id="light-color" class="demo-select">
+                                <option value="red">🔴 Red</option>
+                                <option value="yellow">🟡 Yellow</option>
+                                <option value="green">🟢 Green</option>
+                            </select>
+                            <button class="demo-button small" onclick="checkTrafficLight()">Check Action</button>
+                            <div id="traffic-result" class="mini-output"></div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-box">
+                        <h4>Challenge 2: Weather Advisor</h4>
+                        <p>Suggest clothing based on temperature:</p>
+                        <div class="weather-demo">
+                            <input type="number" id="temperature" placeholder="Temperature (°F)" class="demo-input small" value="75">
+                            <button class="demo-button small" onclick="suggestClothing()">Get Suggestion</button>
+                            <div id="weather-result" class="mini-output"></div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-box">
+                        <h4>Challenge 3: Login System</h4>
+                        <p>Check username and password:</p>
+                        <div class="login-demo">
+                            <input type="text" id="username" placeholder="Username" class="demo-input small" value="admin">
+                            <input type="password" id="login-password" placeholder="Password" class="demo-input small" value="password123">
+                            <button class="demo-button small" onclick="checkLogin()">Login</button>
+                            <div id="login-result" class="mini-output"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Pro Tips:</h4>
+                    <ul>
+                        <li>Use <code>===</code> for strict equality comparisons</li>
+                        <li>Combine conditions with <code>&&</code> (AND) and <code>||</code> (OR)</li>
+                        <li>Use parentheses to group complex conditions</li>
+                        <li>Consider using switch statements for multiple exact matches</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="next-steps">
+                <h2>What's Next?</h2>
+                <p>In Lesson 5, you'll learn about <strong>loops</strong> - how to repeat actions efficiently and create powerful automation!</p>
+                
+                <div class="progress-bar">
+                    <div class="progress" style="width: 20%"></div>
+                </div>
+                <p class="progress-text">Progress: 4/20 lessons complete (20%)</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Smart programs make smart decisions! 🤔💡</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

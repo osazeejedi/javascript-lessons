@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: Repetition (Loops)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔄 Lesson 5: Repetition (Loops)</h1>
+            <p class="subtitle">Master the power of automation through repetition</p>
+        </header>
+
+        <main>
+            <section class="concept">
+                <h2>What are Loops?</h2>
+                <p>Loops are one of the most powerful features in programming. They allow you to repeat actions efficiently without writing the same code over and over again.</p>
+                
+                <div class="example-box">
+                    <h3>Real World Example:</h3>
+                    <p><strong>Making 100 Paper Airplanes:</strong></p>
+                    <ul>
+                        <li>❌ <strong>Without loops:</strong> Write "fold paper, make airplane" 100 times</li>
+                        <li>✅ <strong>With loops:</strong> Write "repeat 100 times: fold paper, make airplane"</li>
+                    </ul>
+                    <p><strong>JavaScript loops work the same way - write once, repeat many times!</strong></p>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>For Loops - Counting Made Easy</h2>
+                <p>For loops are perfect when you know exactly how many times you want to repeat something.</p>
+                
+                <div class="code-example">
+                    <h4>For Loop Structure:</h4>
+                    <pre><code>for (let i = 0; i < 10; i++) {
+    // This code runs 10 times
+    console.log("Count: " + i);
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Countdown Timer Demo:</h3>
+                    <p>Watch a for loop count down from any number:</p>
+                    <input type="number" id="countdown-start" placeholder="Start number" class="demo-input" value="10" min="1" max="100">
+                    <button class="demo-button" onclick="startCountdown()">Start Countdown</button>
+                    <div id="countdown-display" class="countdown-display">Ready to count!</div>
+                    <div id="countdown-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>While Loops - Conditional Repetition</h2>
+                <p>While loops continue running as long as a condition is true. Perfect for situations where you don't know exactly how many times to repeat.</p>
+                
+                <div class="code-example">
+                    <h4>While Loop Structure:</h4>
+                    <pre><code>let count = 0;
+while (count < 5) {
+    console.log("Count: " + count);
+    count++; // Don't forget to update!
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Number Guessing Game:</h3>
+                    <p>The computer picks a number 1-20. Keep guessing until you find it!</p>
+                    <div class="game-area">
+                        <div id="guess-feedback" class="guess-feedback">I'm thinking of a number between 1 and 20...</div>
+                        <input type="number" id="guess-input" placeholder="Your guess" class="demo-input" min="1" max="20">
+                        <button class="demo-button" onclick="makeGuess()">Guess!</button>
+                        <button class="demo-button secondary" onclick="newGuessingGame()">New Game</button>
+                        <div id="guess-stats" class="guess-stats hidden"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Loop Control - Break and Continue</h2>
+                <p>Sometimes you need to exit a loop early or skip certain iterations. That's where break and continue come in!</p>
+                
+                <div class="control-grid">
+                    <div class="control-card">
+                        <h4>Break Statement</h4>
+                        <p>Exits the loop completely</p>
+                        <code>if (condition) break;</code>
+                        <p class="example">Stop when you find what you're looking for</p>
+                    </div>
+                    
+                    <div class="control-card">
+                        <h4>Continue Statement</h4>
+                        <p>Skips to the next iteration</p>
+                        <code>if (condition) continue;</code>
+                        <p class="example">Skip certain values but keep going</p>
+                    </div>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Number Filter Demo:</h3>
+                    <p>Find numbers in a range that meet specific criteria:</p>
+                    <div class="filter-controls">
+                        <input type="number" id="range-start" placeholder="Start" class="demo-input small" value="1">
+                        <input type="number" id="range-end" placeholder="End" class="demo-input small" value="20">
+                        <select id="filter-type" class="demo-select">
+                            <option value="even">Even Numbers</option>
+                            <option value="odd">Odd Numbers</option>
+                            <option value="divisible3">Divisible by 3</option>
+                            <option value="prime">Prime Numbers</option>
+                        </select>
+                        <button class="demo-button" onclick="filterNumbers()">Filter Numbers</button>
+                    </div>
+                    <div id="filter-result" class="output hidden"></div>
+                </div>
+            </section>
+
+            <section class="concept">
+                <h2>Nested Loops - Loops Within Loops</h2>
+                <p>You can put loops inside other loops to create patterns, tables, and complex structures.</p>
+                
+                <div class="code-example">
+                    <h4>Nested Loop Example:</h4>
+                    <pre><code>for (let row = 1; row <= 3; row++) {
+    for (let col = 1; col <= 3; col++) {
+        console.log(`Row ${row}, Column ${col}`);
+    }
+}</code></pre>
+                </div>
+
+                <div class="interactive-demo">
+                    <h3>Pattern Generator:</h3>
+                    <p>Create visual patterns using nested loops:</p>
+                    <div class="pattern-controls">
+                        <select id="pattern-type" class="demo-select">
+                            <option value="square">Square Pattern</option>
+                            <option value="triangle">Triangle Pattern</option>
+                            <option value="diamond">Diamond Pattern</option>
+                            <option value="multiplication">Multiplication Table</option>
+                        </select>
+                        <input type="number" id="pattern-size" placeholder="Size" class="demo-input small" value="5" min="3" max="10">
+                        <button class="demo-button" onclick="generatePattern()">Generate Pattern</button>
+                    </div>
+                    <div id="pattern-display" class="pattern-display"></div>
+                </div>
+            </section>
+
+            <section class="project">
+                <h2>🎯 Major Project: Interactive Drawing Canvas</h2>
+                <p>Let's build a drawing application that uses loops to create animations, patterns, and interactive art!</p>
+                
+                <div class="canvas-container">
+                    <div class="canvas-controls">
+                        <h3>🎨 Drawing Tools</h3>
+                        <div class="tool-group">
+                            <h4>Patterns:</h4>
+                            <button class="tool-btn" onclick="drawCirclePattern()">🔵 Circle Pattern</button>
+                            <button class="tool-btn" onclick="drawSquarePattern()">🟦 Square Pattern</button>
+                            <button class="tool-btn" onclick="drawSpiralPattern()">🌀 Spiral</button>
+                            <button class="tool-btn" onclick="drawStarField()">⭐ Star Field</button>
+                        </div>
+                        
+                        <div class="tool-group">
+                            <h4>Animations:</h4>
+                            <button class="tool-btn" onclick="startRainAnimation()">🌧️ Rain</button>
+                            <button class="tool-btn" onclick="startFireworks()">🎆 Fireworks</button>
+                            <button class="tool-btn" onclick="startWaveAnimation()">🌊 Waves</button>
+                            <button class="tool-btn" onclick="stopAllAnimations()">⏹️ Stop</button>
+                        </div>
+                        
+                        <div class="tool-group">
+                            <h4>Controls:</h4>
+                            <button class="tool-btn secondary" onclick="clearCanvas()">🧹 Clear</button>
+                            <button class="tool-btn secondary" onclick="saveCanvas()">💾 Save</button>
+                        </div>
+                        
+                        <div class="color-picker">
+                            <label>Color:</label>
+                            <input type="color" id="draw-color" value="#10b981">
+                        </div>
+                    </div>
+                    
+                    <div class="canvas-area">
+                        <canvas id="drawing-canvas" width="600" height="400"></canvas>
+                        <div class="canvas-info">
+                            <p>🎨 Click and drag to draw! Use the tools to create patterns and animations.</p>
+                            <div id="canvas-stats" class="canvas-stats">
+                                <span>Loops running: <span id="active-loops">0</span></span>
+                                <span>Elements drawn: <span id="elements-count">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-info">
+                    <h4>🔧 Loop Techniques Used:</h4>
+                    <ul>
+                        <li>✅ <strong>For loops</strong> for drawing patterns and shapes</li>
+                        <li>✅ <strong>While loops</strong> for continuous animations</li>
+                        <li>✅ <strong>Nested loops</strong> for complex 2D patterns</li>
+                        <li>✅ <strong>setInterval</strong> for timed animations</li>
+                        <li>✅ <strong>Array iteration</strong> for managing multiple elements</li>
+                        <li>✅ <strong>Loop control</strong> for performance optimization</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="practice">
+                <h2>🎯 Practice Challenges</h2>
+                <p>Test your loop mastery with these interactive challenges:</p>
+                
+                <div class="challenge-grid">
+                    <div class="challenge-box">
+                        <h4>Challenge 1: FizzBuzz</h4>
+                        <p>Classic programming challenge - count from 1 to 100:</p>
+                        <ul>
+                            <li>If divisible by 3: print "Fizz"</li>
+                            <li>If divisible by 5: print "Buzz"</li>
+                            <li>If divisible by both: print "FizzBuzz"</li>
+                        </ul>
+                        <button class="demo-button small" onclick="runFizzBuzz()">Run FizzBuzz</button>
+                        <div id="fizzbuzz-result" class="mini-output"></div>
+                    </div>
+
+                    <div class="challenge-box">
+                        <h4>Challenge 2: Sum Calculator</h4>
+                        <p>Calculate the sum of numbers in a range:</p>
+                        <div class="sum-demo">
+                            <input type="number" id="sum-start" placeholder="Start" class="demo-input small" value="1">
+                            <input type="number" id="sum-end" placeholder="End" class="demo-input small" value="100">
+                            <button class="demo-button small" onclick="calculateSum()">Calculate Sum</button>
+                            <div id="sum-result" class="mini-output"></div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-box">
+                        <h4>Challenge 3: Factorial</h4>
+                        <p>Calculate factorial (n!) using loops:</p>
+                        <div class="factorial-demo">
+                            <input type="number" id="factorial-input" placeholder="Number" class="demo-input small" value="5" min="0" max="20">
+                            <button class="demo-button small" onclick="calculateFactorial()">Calculate!</button>
+                            <div id="factorial-result" class="mini-output"></div>
+                        </div>
+                    </div>
+
+                    <div class="challenge-box">
+                        <h4>Challenge 4: Prime Finder</h4>
+                        <p>Find all prime numbers up to a given number:</p>
+                        <div class="prime-demo">
+                            <input type="number" id="prime-limit" placeholder="Limit" class="demo-input small" value="50" min="2" max="1000">
+                            <button class="demo-button small" onclick="findPrimes()">Find Primes</button>
+                            <div id="prime-result" class="mini-output"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <h4>💡 Loop Mastery Tips:</h4>
+                    <ul>
+                        <li>Always make sure your loop condition will eventually become false</li>
+                        <li>Use for loops when you know the number of iterations</li>
+                        <li>Use while loops when the condition depends on changing data</li>
+                        <li>Be careful with nested loops - they can slow down your program</li>
+                        <li>Use break and continue to make your loops more efficient</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="next-steps">
+                <h2>What's Next?</h2>
+                <p>In Lesson 6, you'll learn about <strong>Functions</strong> - how to create reusable code blocks that make your programs more organized and powerful!</p>
+                
+                <div class="progress-bar">
+                    <div class="progress" style="width: 25%"></div>
+                </div>
+                <p class="progress-text">Progress: 5/20 lessons complete (25%)</p>
+            </section>
+        </main>
+
+        <footer>
+            <p>Loops are the engine of automation! 🔄⚡</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

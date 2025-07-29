@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Mastery Course - From Zero to Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .progress-overview {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.2);
+            height: 12px;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            height: 100%;
+            width: 20%;
+            transition: width 0.3s ease;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .lesson-card.completed {
+            border-left: 5px solid #22c55e;
+        }
+
+        .lesson-card.current {
+            border-left: 5px solid #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        .lesson-card.locked {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .lesson-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .lesson-title {
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            margin-right: 40px;
+        }
+
+        .lesson-description {
+            color: #6c757d;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .lesson-topics {
+            margin-bottom: 20px;
+        }
+
+        .lesson-topics h4 {
+            color: #495057;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .topics-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .topic-tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+
+        .lesson-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .lesson-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .lesson-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+        }
+
+        .info-section {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 30px 0;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🚀 JavaScript Mastery Course</h1>
+            <p>From Complete Beginner to Web Development Pro</p>
+            <div class="progress-overview">
+                <h3>Your Progress: 6/20 Lessons Complete</h3>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 30%"></div>
+                </div>
+                <p>30% Complete - Excellent progress! 🌟</p>
+            </div>
+        </header>
+
+        <main>
+            <section class="info-section">
+                <h2>🎯 Course Overview</h2>
+                <p>This comprehensive JavaScript course is designed specifically for complete beginners who want to master web development. Each lesson builds on the previous one, with hands-on projects and interactive examples.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">📚</div>
+                        <h3>Interactive Learning</h3>
+                        <p>Every lesson includes clickable examples and live code demonstrations</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🛠️</div>
+                        <h3>Real Projects</h3>
+                        <p>Build actual web applications while learning core concepts</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎮</div>
+                        <h3>Hands-On Practice</h3>
+                        <p>Interactive exercises and challenges in every lesson</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Web Development Focus</h3>
+                        <p>All examples are tailored for modern web development</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="lessons-grid">
+                <!-- Lesson 1 - Completed -->
+                <div class="lesson-card completed">
+                    <div class="lesson-number">1</div>
+                    <div class="lesson-status">✅</div>
+                    <h3 class="lesson-title">Introduction to JavaScript</h3>
+                    <p class="lesson-description">
+                        Learn what programming is, understand JavaScript's role in web development, and write your first "Hello World" program.
+                    </p>
+                    <div class="lesson-topics">
+                        <h4>Topics Covered:</h4>
+                        <div class="topics-list">
+                            <span class="topic-tag">Programming Basics</span>
+                            <span class="topic-tag">JavaScript Overview</span>
+                            <span class="topic-tag">Console Output</span>
+                            <span class="topic-tag">DOM Interaction</span>
+                        </div>
+                    </div>
+                    <a href="lesson-01-introduction/index.html" class="lesson-link">Review Lesson</a>
+                </div>
+
+                <!-- Lesson 2 - Completed -->
+                <div class="lesson-card completed">
+                    <div class="lesson-number">2</div>
+                    <div class="lesson-status">✅</div>
+                    <h3 class="lesson-title">Variables and Data Types</h3>
+                    <p class="lesson-description">
+                        Master the art of storing information using variables. Learn about strings, numbers, and booleans with interactive examples.
+                    </p>
+                    <div class="lesson-topics">
+                        <h4>Topics Covered:</h4>
+                        <div class="topics-list">
+                            <span class="topic-tag">Variable Declaration</span>
+                            <span class="topic-tag">Strings</span>
+                            <span class="topic-tag">Numbers</span>
+                            <span class="topic-tag">Booleans</span>
+                            <span class="topic-tag">Variable Usage</span>
+                        </div>
+                    </div>
+                    <a href="lesson-02-variables/index.html" class="lesson-link">Review Lesson</a>
+                </div>
+
+                <!-- Lesson 3 - Completed -->
+                <div class="lesson-card completed">
+                    <div class="lesson-number">3</div>
+                    <div class="lesson-status">✅</div>
+                    <h3 class="lesson-title">Basic Operations</h3>
+                    <p class="lesson-description">
+                        Learn to perform math operations, manipulate strings, and compare values. Build your first calculator application!
+                    </p>
+                    <div class="lesson-topics">
+                        <h4>Topics Covered:</h4>
+                        <div class="topics-list">
+                            <span class="topic-tag">Math Operations</span>
+                            <span class="topic-tag">String Methods</span>
+                            <span class="topic-tag">Comparisons</span>
+                            <span class="topic-tag">Calculator Project</span>
+                        </div>
+                    </div>
+                    <a href="lesson-03-operations/index.html" class="lesson-link">Review Lesson</a>
+                </div>
+
+                <!-- Lesson 4 - Completed -->
+                <div class="lesson-card completed">
+                    <div class="lesson-number">4</div>
+                    <div class="lesson-status">✅</div>
+                    <h3 class="lesson-title">Making Decisions (Conditionals)</h3>
+                    <p class="lesson-description">
+                        Learn how to make your programs smart with if/else statements. Create programs that respond differently based on conditions.
+                    </p>
+                    <div class="lesson-topics">
+                        <h4>Topics Covered:</h4>
+                        <div class="topics-list">
+                            <span class="topic-tag">If Statements</span>
+                            <span class="topic-tag">Else Conditions</span>
+                            <span class="topic-tag">Logical Operators</span>
+                            <span class="topic-tag">Decision Trees</span>
+                        </div>
+                    </div>
+                    <a href="lesson-04-conditionals/index.html" class="lesson-link">Review Lesson</a>
+                </div>
+
+                <!-- Lesson 5 - Completed -->
+                <div class="lesson-card completed">
+                    <div class="lesson-number">5</div>
+                    <div class="lesson-status">✅</div>
+                    <h3 class="lesson-title">Repetition (Loops)</h3>
+                    <p class="lesson-description">
+                        Discover the power of loops to repeat actions efficiently. Learn for loops, while loops, and when to use each.
+                    </p>
+                    <div class="lesson-topics">
+                        <h4>Topics Covered:</h4>
+                        <div class="topics-list">
+                            <span class="topic-tag">For Loops</span>
+                            <span class="topic-tag">While Loops</span>
+                            <span class="topic-tag">Loop Control</span>
+                            <span class="topic-tag">Iteration Patterns</span>
+                        </div>
+                    </div>
+                    <a href="lesson-05-loops/index.html" class="lesson-link">Start Lesson</a>
+                </div>
+
+                <!-- Lesson 6 - Available -->
+                <div class="lesson-card completed">
+                    <div class="lesson-number">6</div>
+                    <div class="lesson-status">✅</div>
+                    <h3 class="lesson-title">Functions - Your First Tools</h3>
+                    <p class="lesson-description">
+                        Create reusable code blocks with functions. Learn parameters, return values, and how to organize your code effectively.
+                    </p>
+                    <div class="lesson-topics">
+                        <h4>Topics Covered:</h4>
+                        <div class="topics-list">
+                            <span class="topic-tag">Function Declaration</span>
+                            <span class="topic-tag">Parameters</span>
+                            <span class="topic-tag">Return Values</span>
+                            <span class="topic-tag">Code Organization</span>
+                        </div>
+                    </div>
+                    <a href="lesson-06-functions/index.html" class="lesson-link">Start Lesson</a>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <h2>🎓 Learning Path</h2>
+                <p><strong>Phase 1: Foundation (Lessons 1-5)</strong> - Master the basics of programming and JavaScript syntax</p>
+                <p><strong>Phase 2: Building Blocks (Lessons 6-10)</strong> - Learn functions, arrays, objects, and error handling</p>
+                <p><strong>Phase 3: Interactive Programming (Lessons 11-15)</strong> - Build dynamic web applications with DOM manipulation</p>
+                <p><strong>Phase 4: Advanced Concepts (Lessons 16-20)</strong> - Master modern JavaScript and professional development patterns</p>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>🌟 Every expert was once a beginner. Keep coding, keep learning! 🌟</p>
+            <p>JavaScript Mastery Course - Your journey to web development excellence</p>
+        </footer>
+    </div>
+</body>
+</html>
