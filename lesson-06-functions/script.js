@@ -995,3 +995,91 @@ document.addEventListener('keypress', function(e) {
 
 console.log("🎓 Lesson 6 JavaScript loaded! Try building your function toolkit.");
 console.log("💡 Tip: Open the browser console to see detailed function execution logs!");
+
+/*
+ * LESSON COMPLETION FUNCTIONALITY
+ * This handles marking the lesson as complete and saving progress
+ */
+
+// Track lesson start
+if (window.parent && window.parent.markLessonStarted) {
+    window.parent.markLessonStarted(6);
+} else if (window.markLessonStarted) {
+    window.markLessonStarted(6);
+}
+
+// Track time spent on lesson
+let startTime = Date.now();
+let timeSpent = 0;
+
+// Update time spent every 30 seconds
+setInterval(function() {
+    timeSpent = Math.floor((Date.now() - startTime) / 1000 / 60); // minutes
+}, 30000);
+
+// Wait for DOM to be ready before adding completion functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const completeButton = document.getElementById('complete-lesson-btn');
+    const completionMessage = document.getElementById('completion-message');
+    
+    if (completeButton) {
+        completeButton.addEventListener('click', function() {
+            // Calculate time spent (in minutes)
+            const currentTimeSpent = Math.max(Math.floor((Date.now() - startTime) / 1000 / 60), 5); // minimum 5 minutes
+            
+            // Disable button to prevent multiple clicks
+            completeButton.disabled = true;
+            completeButton.textContent = 'Saving Progress...';
+            
+            // Try to mark lesson as completed
+            if (window.parent && window.parent.markLessonCompleted) {
+                // Called from within dashboard iframe
+                window.parent.markLessonCompleted(6, currentTimeSpent).then(() => {
+                    showCompletionSuccess();
+                }).catch((error) => {
+                    console.error('Error saving progress:', error);
+                    showCompletionError();
+                });
+            } else {
+                // Standalone lesson page - save to localStorage as fallback
+                const progress = JSON.parse(localStorage.getItem('lessonProgress') || '{}');
+                progress['lesson_6'] = {
+                    completed: true,
+                    timeSpent: currentTimeSpent,
+                    completedAt: new Date().toISOString()
+                };
+                localStorage.setItem('lessonProgress', JSON.stringify(progress));
+                showCompletionSuccess();
+            }
+        });
+    }
+    
+    function showCompletionSuccess() {
+        completeButton.textContent = '✅ Course Completed!';
+        completeButton.style.background = '#22c55e';
+        completionMessage.classList.remove('hidden');
+        completionMessage.classList.add('show');
+        
+        console.log('🎉 JavaScript Fundamentals Course completed successfully!');
+        console.log('🏆 You are now a JavaScript Fundamentals Master!');
+        
+        // Show celebration effect
+        setTimeout(() => {
+            document.body.style.background = 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)';
+            setTimeout(() => {
+                document.body.style.background = '';
+            }, 3000);
+        }, 500);
+    }
+    
+    function showCompletionError() {
+        completeButton.disabled = false;
+        completeButton.textContent = 'Try Again';
+        completeButton.style.background = '#ef4444';
+        
+        setTimeout(() => {
+            completeButton.textContent = 'Complete JavaScript Fundamentals Course';
+            completeButton.style.background = '';
+        }, 3000);
+    }
+});

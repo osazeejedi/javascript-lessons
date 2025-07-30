@@ -811,3 +811,91 @@ document.addEventListener('keypress', function(e) {
 
 console.log("🎓 Lesson 5 JavaScript loaded! Try the interactive demos above.");
 console.log("💡 Tip: Open the browser console to see detailed loop execution logs!");
+
+/*
+ * LESSON COMPLETION FUNCTIONALITY
+ * This handles marking the lesson as complete and saving progress
+ */
+
+// Track lesson start
+if (window.parent && window.parent.markLessonStarted) {
+    window.parent.markLessonStarted(5);
+} else if (window.markLessonStarted) {
+    window.markLessonStarted(5);
+}
+
+// Track time spent on lesson
+let startTime = Date.now();
+let timeSpent = 0;
+
+// Update time spent every 30 seconds
+setInterval(function() {
+    timeSpent = Math.floor((Date.now() - startTime) / 1000 / 60); // minutes
+}, 30000);
+
+// Wait for DOM to be ready before adding completion functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const completeButton = document.getElementById('complete-lesson-btn');
+    const completionMessage = document.getElementById('completion-message');
+    
+    if (completeButton) {
+        completeButton.addEventListener('click', function() {
+            // Calculate time spent (in minutes)
+            const currentTimeSpent = Math.max(Math.floor((Date.now() - startTime) / 1000 / 60), 5); // minimum 5 minutes
+            
+            // Disable button to prevent multiple clicks
+            completeButton.disabled = true;
+            completeButton.textContent = 'Saving Progress...';
+            
+            // Try to mark lesson as completed
+            if (window.parent && window.parent.markLessonCompleted) {
+                // Called from within dashboard iframe
+                window.parent.markLessonCompleted(5, currentTimeSpent).then(() => {
+                    showCompletionSuccess();
+                }).catch((error) => {
+                    console.error('Error saving progress:', error);
+                    showCompletionError();
+                });
+            } else {
+                // Standalone lesson page - save to localStorage as fallback
+                const progress = JSON.parse(localStorage.getItem('lessonProgress') || '{}');
+                progress['lesson_5'] = {
+                    completed: true,
+                    timeSpent: currentTimeSpent,
+                    completedAt: new Date().toISOString()
+                };
+                localStorage.setItem('lessonProgress', JSON.stringify(progress));
+                showCompletionSuccess();
+            }
+        });
+    }
+    
+    function showCompletionSuccess() {
+        completeButton.textContent = '✅ Completed!';
+        completeButton.style.background = '#22c55e';
+        completionMessage.classList.remove('hidden');
+        completionMessage.classList.add('show');
+        
+        console.log('🎉 Lesson 5 completed successfully!');
+        console.log('🚀 You can now proceed to Lesson 6!');
+        
+        // Show celebration effect
+        setTimeout(() => {
+            document.body.style.background = 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)';
+            setTimeout(() => {
+                document.body.style.background = '';
+            }, 2000);
+        }, 500);
+    }
+    
+    function showCompletionError() {
+        completeButton.disabled = false;
+        completeButton.textContent = 'Try Again';
+        completeButton.style.background = '#ef4444';
+        
+        setTimeout(() => {
+            completeButton.textContent = 'Mark Lesson as Complete';
+            completeButton.style.background = '';
+        }, 3000);
+    }
+});

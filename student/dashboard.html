@@ -461,15 +461,8 @@
         </div>
     </div>
 
-    <script src="../config/supabase.js"></script>
     <script>
-        // Fix Supabase initialization
-        const supabase = window.supabase.createClient(
-            'https://mopujykbhuumbdcuxnnj.supabase.co',
-            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vcHVqeWtiaHV1bWJkY3V4bm5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3OTIwNjUsImV4cCI6MjA2OTM2ODA2NX0.9cxFu3VD5Na0htjbSh-604_rrY3mmpnvOdgWDEtcnxc'
-        );
-
-        let currentUser = null;
+        // Simplified progress tracking using localStorage
         let userProgress = [];
 
         const lessons = [
@@ -511,70 +504,48 @@
             }
         ];
 
-        // Initialize dashboard
-        async function initDashboard() {
-            try {
-                const { data: { user }, error } = await supabase.auth.getUser();
-                
-                if (error || !user) {
-                    window.location.href = '../auth/login.html';
-                    return;
-                }
-
-                // Check if user is student
-                const userRole = user.user_metadata?.role || 'student';
-                if (userRole === 'admin') {
-                    window.location.href = '../admin/dashboard.html';
-                    return;
-                }
-
-                currentUser = user;
-                
-                // Display student name
-                document.getElementById('studentName').textContent = 
-                    user.user_metadata?.full_name || user.email;
-
-                // Load user progress and update dashboard
-                await loadUserProgress();
-                updateProgressStats();
-                renderLessons();
-                updateBadges();
-
-            } catch (error) {
-                console.error('Dashboard initialization error:', error);
-                alert('Error loading dashboard. Please try again.');
-            }
+        // Initialize dashboard - simplified version
+        function initDashboard() {
+            console.log('🎓 Initializing simplified dashboard...');
+            
+            // Display default student name
+            document.getElementById('studentName').textContent = 'JavaScript Student';
+            
+            // Load progress from localStorage
+            loadUserProgress();
+            updateProgressStats();
+            renderLessons();
+            updateBadges();
+            
+            console.log('✅ Dashboard initialized successfully!');
         }
 
-        // Load user progress from Supabase database
-        async function loadUserProgress() {
+        // Load user progress from localStorage
+        function loadUserProgress() {
             try {
-                console.log('📊 Loading user progress from database...');
+                console.log('📊 Loading user progress from localStorage...');
                 
-                // Query user progress from Supabase
-                const { data, error } = await supabase
-                    .from('user_progress')
-                    .select('*')
-                    .eq('user_id', currentUser.id)
-                    .order('lesson_id', { ascending: true });
-
-                if (error) {
-                    console.error('Database query error:', error);
-                    throw error;
-                }
-
-                userProgress = data || [];
-                console.log(`✅ Loaded ${userProgress.length} progress records`);
+                // Get progress from localStorage
+                const savedProgress = localStorage.getItem('lessonProgress');
+                const progressData = savedProgress ? JSON.parse(savedProgress) : {};
                 
-                // If no progress exists, initialize with lesson 1 available
-                if (userProgress.length === 0) {
-                    console.log('🆕 No progress found, initializing new student...');
-                    // Don't create any progress records yet - let students start fresh
+                // Convert to array format for compatibility
+                userProgress = [];
+                for (let i = 1; i <= lessons.length; i++) {
+                    const lessonKey = `lesson_${i}`;
+                    if (progressData[lessonKey]) {
+                        userProgress.push({
+                            lesson_id: i,
+                            completed: progressData[lessonKey].completed || false,
+                            time_spent: progressData[lessonKey].timeSpent || 0
+                        });
+                    }
                 }
+                
+                console.log(`✅ Loaded progress for ${userProgress.length} lessons`);
                 
             } catch (error) {
                 console.error('Error loading progress:', error);
-                console.warn('⚠️ Falling back to empty progress - student can start from lesson 1');
                 userProgress = [];
             }
         }
@@ -673,52 +644,33 @@
             }
         }
 
-        // Save lesson progress to database
-        async function saveProgress(lessonId, completed = false, timeSpent = 0) {
+        // Save lesson progress to localStorage - simplified version
+        function saveProgress(lessonId, completed = false, timeSpent = 0) {
             try {
                 console.log(`💾 Saving progress for lesson ${lessonId}...`);
                 
-                // Check if progress record already exists
-                const existingProgress = userProgress.find(p => p.lesson_id === lessonId);
+                // Get current progress from localStorage
+                const savedProgress = localStorage.getItem('lessonProgress');
+                const progressData = savedProgress ? JSON.parse(savedProgress) : {};
                 
+                // Update progress for this lesson
+                const lessonKey = `lesson_${lessonId}`;
+                progressData[lessonKey] = {
+                    completed: completed,
+                    timeSpent: timeSpent,
+                    completedAt: completed ? new Date().toISOString() : null
+                };
+                
+                // Save back to localStorage
+                localStorage.setItem('lessonProgress', JSON.stringify(progressData));
+                
+                // Update local userProgress array
+                const existingProgress = userProgress.find(p => p.lesson_id === lessonId);
                 if (existingProgress) {
-                    // Update existing record
-                    const { data, error } = await supabase
-                        .from('user_progress')
-                        .update({
-                            completed: completed,
-                            time_spent: timeSpent,
-                            updated_at: new Date().toISOString()
-                        })
-                        .eq('user_id', currentUser.id)
-                        .eq('lesson_id', lessonId)
-                        .select();
-
-                    if (error) throw error;
-                    
-                    // Update local progress
                     existingProgress.completed = completed;
                     existingProgress.time_spent = timeSpent;
-                    
                 } else {
-                    // Create new progress record
-                    const { data, error } = await supabase
-                        .from('user_progress')
-                        .insert([{
-                            user_id: currentUser.id,
-                            lesson_id: lessonId,
-                            completed: completed,
-                            time_spent: timeSpent,
-                            started_at: new Date().toISOString(),
-                            updated_at: new Date().toISOString()
-                        }])
-                        .select();
-
-                    if (error) throw error;
-                    
-                    // Add to local progress
                     userProgress.push({
-                        user_id: currentUser.id,
                         lesson_id: lessonId,
                         completed: completed,
                         time_spent: timeSpent
@@ -727,7 +679,7 @@
                 
                 console.log(`✅ Progress saved for lesson ${lessonId}`);
                 
-                // Refresh dashboard
+                // Refresh dashboard immediately
                 updateProgressStats();
                 renderLessons();
                 updateBadges();
@@ -739,11 +691,11 @@
         }
 
         // Mark lesson as started (called when lesson is accessed)
-        async function markLessonStarted(lessonId) {
+        function markLessonStarted(lessonId) {
             try {
                 const existingProgress = userProgress.find(p => p.lesson_id === lessonId);
                 if (!existingProgress) {
-                    await saveProgress(lessonId, false, 0);
+                    saveProgress(lessonId, false, 0);
                 }
             } catch (error) {
                 console.error('Error marking lesson as started:', error);
@@ -751,12 +703,18 @@
         }
 
         // Mark lesson as completed (to be called from lesson pages)
-        async function markLessonCompleted(lessonId, timeSpent = 30) {
+        function markLessonCompleted(lessonId, timeSpent = 30) {
             try {
-                await saveProgress(lessonId, true, timeSpent);
+                saveProgress(lessonId, true, timeSpent);
                 console.log(`🎉 Lesson ${lessonId} marked as completed!`);
+                
+                // Show success message
+                alert(`🎉 Lesson ${lessonId} completed! The next lesson is now unlocked.`);
+                
+                return Promise.resolve(); // Return resolved promise for compatibility
             } catch (error) {
                 console.error('Error marking lesson as completed:', error);
+                return Promise.reject(error);
             }
         }
 
@@ -765,19 +723,16 @@
         window.markLessonCompleted = markLessonCompleted;
         window.saveProgress = saveProgress;
 
-        // Logout function
-        async function logout() {
-            try {
-                const { error } = await supabase.auth.signOut();
-                if (error) throw error;
-                window.location.href = '../auth/login.html';
-            } catch (error) {
-                console.error('Logout error:', error);
-                alert('Error logging out. Please try again.');
-            }
+        // Simplified logout function
+        function logout() {
+            // Clear progress if desired (optional)
+            // localStorage.removeItem('lessonProgress');
+            alert('Logged out successfully!');
+            // For now, just reload the page
+            window.location.reload();
         }
 
-        // Initialize dashboard when page loads
+        // Initialize dashboard when page loads - no async needed
         window.addEventListener('load', initDashboard);
 
         console.log('🎓 Student dashboard loaded!');

@@ -10,9 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("🎉 Welcome to your JavaScript journey!");
     console.log("This message is coming from JavaScript!");
     
-    // Track lesson start
+    // Track lesson start - simplified version
     if (window.parent && window.parent.markLessonStarted) {
         window.parent.markLessonStarted(1);
+    } else if (window.markLessonStarted) {
+        window.markLessonStarted(1);
     }
     
     // Track time spent on lesson
