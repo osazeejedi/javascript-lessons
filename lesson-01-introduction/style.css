@@ -288,3 +288,49 @@ footer {
         transform: translateY(0);
     }
 }
+
+/* Completion section styles */
+.completion-section {
+    background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 100%);
+    border: 2px solid #22c55e;
+    border-radius: 15px;
+    padding: 25px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.completion-section h3 {
+    color: #16a34a;
+    margin-bottom: 10px;
+}
+
+.complete-button {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 15px 0;
+}
+
+.complete-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+}
+
+.complete-button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.completion-message {
+    color: #16a34a;
+    font-weight: 600;
+    margin-top: 15px;
+}
