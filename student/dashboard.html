@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - JavaScript Mastery Course</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .welcome-title {
+            font-size: 2.5em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .welcome-subtitle {
+            color: #6c757d;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+
+        .progress-overview {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .progress-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .progress-bar-container {
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 15px;
+            height: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            height: 100%;
+            transition: width 0.8s ease;
+            position: relative;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .lessons-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .lessons-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .lesson-card.completed {
+            border-left: 5px solid #22c55e;
+        }
+
+        .lesson-card.current {
+            border-left: 5px solid #3b82f6;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+
+        .lesson-card.locked {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .lesson-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+        }
+
+        .lesson-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .lesson-title {
+            color: #2c3e50;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .lesson-description {
+            color: #6c757d;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .lesson-progress {
+            margin-bottom: 15px;
+        }
+
+        .lesson-progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 6px;
+            overflow: hidden;
+        }
+
+        .lesson-progress-fill {
+            background: linear-gradient(90deg, #22c55e, #16a34a);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .lesson-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .lesson-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .lesson-link.disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .achievements-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .achievements-title {
+            font-size: 1.8em;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .badge {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: scale(1.05);
+        }
+
+        .badge.earned {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+        }
+
+        .badge-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .badge-name {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .badge-description {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .welcome-title {
+                font-size: 2em;
+            }
+
+            .progress-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <h1>
+                <span>🎓</span>
+                My Learning Dashboard
+            </h1>
+            <div class="user-info">
+                <span id="studentName">Loading...</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h2 class="welcome-title">Welcome Back! 🚀</h2>
+            <p class="welcome-subtitle">Continue your JavaScript mastery journey</p>
+        </div>
+
+        <!-- Progress Overview -->
+        <div class="progress-overview">
+            <h2 class="progress-title">
+                <span>📊</span>
+                Your Progress
+            </h2>
+            
+            <div class="progress-stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="completedLessons">0</div>
+                    <div class="stat-label">Lessons Completed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="totalTime">0h</div>
+                    <div class="stat-label">Time Spent Learning</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="currentStreak">0</div>
+                    <div class="stat-label">Day Streak</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="badgesEarned">0</div>
+                    <div class="stat-label">Badges Earned</div>
+                </div>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="overallProgress" style="width: 0%">
+                        <div class="progress-text" id="progressText">0% Complete</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lessons Section -->
+        <div class="lessons-section">
+            <h2 class="lessons-title">
+                <span>📚</span>
+                Course Lessons
+            </h2>
+            
+            <div class="lessons-grid" id="lessonsGrid">
+                <!-- Lessons will be loaded dynamically -->
+            </div>
+        </div>
+
+        <!-- Achievements Section -->
+        <div class="achievements-section">
+            <h2 class="achievements-title">
+                <span>🏆</span>
+                Achievements
+            </h2>
+            
+            <div class="badges-grid">
+                <div class="badge" id="firstLessonBadge">
+                    <div class="badge-icon">🎯</div>
+                    <div class="badge-name">First Steps</div>
+                    <div class="badge-description">Complete your first lesson</div>
+                </div>
+                <div class="badge" id="halfwayBadge">
+                    <div class="badge-icon">🔥</div>
+                    <div class="badge-name">Halfway Hero</div>
+                    <div class="badge-description">Complete 50% of the course</div>
+                </div>
+                <div class="badge" id="speedLearnerBadge">
+                    <div class="badge-icon">⚡</div>
+                    <div class="badge-name">Speed Learner</div>
+                    <div class="badge-description">Complete 3 lessons in one day</div>
+                </div>
+                <div class="badge" id="completionBadge">
+                    <div class="badge-icon">🎓</div>
+                    <div class="badge-name">Course Master</div>
+                    <div class="badge-description">Complete the entire course</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../config/supabase.js"></script>
+    <script>
+        // Fix Supabase initialization
+        const supabase = window.supabase.createClient(
+            'https://mopujykbhuumbdcuxnnj.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1vcHVqeWtiaHV1bWJkY3V4bm5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3OTIwNjUsImV4cCI6MjA2OTM2ODA2NX0.9cxFu3VD5Na0htjbSh-604_rrY3mmpnvOdgWDEtcnxc'
+        );
+
+        let currentUser = null;
+        let userProgress = [];
+
+        const lessons = [
+            {
+                id: 1,
+                title: 'Introduction to JavaScript',
+                description: 'Learn what programming is and write your first "Hello World" program.',
+                url: '../lesson-01-introduction/index.html'
+            },
+            {
+                id: 2,
+                title: 'Variables and Data Types',
+                description: 'Master the art of storing information using variables.',
+                url: '../lesson-02-variables/index.html'
+            },
+            {
+                id: 3,
+                title: 'Basic Operations',
+                description: 'Learn to perform math operations and manipulate strings.',
+                url: '../lesson-03-operations/index.html'
+            },
+            {
+                id: 4,
+                title: 'Making Decisions (Conditionals)',
+                description: 'Learn how to make your programs smart with if/else statements.',
+                url: '../lesson-04-conditionals/index.html'
+            },
+            {
+                id: 5,
+                title: 'Repetition (Loops)',
+                description: 'Discover the power of loops to repeat actions efficiently.',
+                url: '../lesson-05-loops/index.html'
+            },
+            {
+                id: 6,
+                title: 'Functions - Your First Tools',
+                description: 'Create reusable code blocks with functions.',
+                url: '../lesson-06-functions/index.html'
+            }
+        ];
+
+        // Initialize dashboard
+        async function initDashboard() {
+            try {
+                const { data: { user }, error } = await supabase.auth.getUser();
+                
+                if (error || !user) {
+                    window.location.href = '../auth/login.html';
+                    return;
+                }
+
+                // Check if user is student
+                const userRole = user.user_metadata?.role || 'student';
+                if (userRole === 'admin') {
+                    window.location.href = '../admin/dashboard.html';
+                    return;
+                }
+
+                currentUser = user;
+                
+                // Display student name
+                document.getElementById('studentName').textContent = 
+                    user.user_metadata?.full_name || user.email;
+
+                // Load user progress and update dashboard
+                await loadUserProgress();
+                updateProgressStats();
+                renderLessons();
+                updateBadges();
+
+            } catch (error) {
+                console.error('Dashboard initialization error:', error);
+                alert('Error loading dashboard. Please try again.');
+            }
+        }
+
+        // Load user progress from localStorage (mock data for now)
+        async function loadUserProgress() {
+            try {
+                // For now, we'll use localStorage to simulate progress tracking
+                // In production, this would query Supabase
+                const savedProgress = localStorage.getItem(`progress_${currentUser.id}`);
+                userProgress = savedProgress ? JSON.parse(savedProgress) : [];
+                
+                // Add some mock progress if none exists
+                if (userProgress.length === 0) {
+                    userProgress = [
+                        { lesson_id: 1, completed: true, time_spent: 25 },
+                        { lesson_id: 2, completed: true, time_spent: 30 },
+                        { lesson_id: 3, completed: true, time_spent: 35 },
+                        { lesson_id: 4, completed: false, time_spent: 15 }
+                    ];
+                    localStorage.setItem(`progress_${currentUser.id}`, JSON.stringify(userProgress));
+                }
+            } catch (error) {
+                console.error('Error loading progress:', error);
+                userProgress = [];
+            }
+        }
+
+        // Update progress statistics
+        function updateProgressStats() {
+            const completedCount = userProgress.filter(p => p.completed).length;
+            const totalTime = userProgress.reduce((sum, p) => sum + (p.time_spent || 0), 0);
+            const completionPercentage = Math.round((completedCount / lessons.length) * 100);
+
+            document.getElementById('completedLessons').textContent = completedCount;
+            document.getElementById('totalTime').textContent = `${Math.round(totalTime / 60)}h`;
+            document.getElementById('currentStreak').textContent = '3'; // Mock data
+            document.getElementById('badgesEarned').textContent = Math.min(completedCount, 4);
+
+            // Update progress bar
+            const progressFill = document.getElementById('overallProgress');
+            const progressText = document.getElementById('progressText');
+            
+            progressFill.style.width = `${completionPercentage}%`;
+            progressText.textContent = `${completionPercentage}% Complete`;
+        }
+
+        // Render lessons
+        function renderLessons() {
+            const lessonsGrid = document.getElementById('lessonsGrid');
+            lessonsGrid.innerHTML = '';
+
+            lessons.forEach((lesson, index) => {
+                const progress = userProgress.find(p => p.lesson_id === lesson.id);
+                const isCompleted = progress?.completed || false;
+                const isAccessible = index === 0 || userProgress.find(p => p.lesson_id === index && p.completed);
+                
+                let cardClass = 'lesson-card';
+                let statusIcon = '🔒';
+                let linkClass = 'lesson-link';
+                let linkText = 'Start Lesson';
+
+                if (isCompleted) {
+                    cardClass += ' completed';
+                    statusIcon = '✅';
+                    linkText = 'Review Lesson';
+                } else if (isAccessible) {
+                    cardClass += ' current';
+                    statusIcon = '📍';
+                } else {
+                    cardClass += ' locked';
+                    linkClass += ' disabled';
+                    linkText = 'Locked';
+                }
+
+                const lessonCard = document.createElement('div');
+                lessonCard.className = cardClass;
+                lessonCard.innerHTML = `
+                    <div class="lesson-status">${statusIcon}</div>
+                    <div class="lesson-number">${lesson.id}</div>
+                    <h3 class="lesson-title">${lesson.title}</h3>
+                    <p class="lesson-description">${lesson.description}</p>
+                    <div class="lesson-progress">
+                        <div class="lesson-progress-bar">
+                            <div class="lesson-progress-fill" style="width: ${isCompleted ? 100 : (progress?.time_spent ? 50 : 0)}%"></div>
+                        </div>
+                    </div>
+                    <a href="${isAccessible ? lesson.url : '#'}" class="${linkClass}" ${!isAccessible ? 'onclick="return false;"' : ''}>
+                        ${linkText}
+                    </a>
+                `;
+
+                lessonsGrid.appendChild(lessonCard);
+            });
+        }
+
+        // Update badges based on progress
+        function updateBadges() {
+            const completedCount = userProgress.filter(p => p.completed).length;
+
+            // First lesson badge
+            if (completedCount >= 1) {
+                document.getElementById('firstLessonBadge').classList.add('earned');
+            }
+
+            // Halfway badge
+            if (completedCount >= 3) {
+                document.getElementById('halfwayBadge').classList.add('earned');
+            }
+
+            // Speed learner badge (mock condition)
+            if (completedCount >= 2) {
+                document.getElementById('speedLearnerBadge').classList.add('earned');
+            }
+
+            // Completion badge
+            if (completedCount >= 6) {
+                document.getElementById('completionBadge').classList.add('earned');
+            }
+        }
+
+        // Logout function
+        async function logout() {
+            try {
+                const { error } = await supabase.auth.signOut();
+                if (error) throw error;
+                window.location.href = '../auth/login.html';
+            } catch (error) {
+                console.error('Logout error:', error);
+                alert('Error logging out. Please try again.');
+            }
+        }
+
+        // Initialize dashboard when page loads
+        window.addEventListener('load', initDashboard);
+
+        console.log('🎓 Student dashboard loaded!');
+    </script>
+</body>
+</html>
