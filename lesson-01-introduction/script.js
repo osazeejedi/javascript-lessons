@@ -162,13 +162,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         } else {
             // Standalone lesson page - save to localStorage as fallback
-            const progress = JSON.parse(localStorage.getItem('lesson_progress') || '{}');
+            const progress = JSON.parse(localStorage.getItem('lessonProgress') || '{}');
             progress['lesson_1'] = {
                 completed: true,
                 timeSpent: currentTimeSpent,
                 completedAt: new Date().toISOString()
             };
-            localStorage.setItem('lesson_progress', JSON.stringify(progress));
+            localStorage.setItem('lessonProgress', JSON.stringify(progress));
             showCompletionSuccess();
         }
     });

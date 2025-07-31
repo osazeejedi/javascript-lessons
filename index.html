@@ -280,127 +280,8 @@
                 </div>
             </section>
 
-            <section class="lessons-grid">
-                <!-- Lesson 1 - Completed -->
-                <div class="lesson-card completed">
-                    <div class="lesson-number">1</div>
-                    <div class="lesson-status">✅</div>
-                    <h3 class="lesson-title">Introduction to JavaScript</h3>
-                    <p class="lesson-description">
-                        Learn what programming is, understand JavaScript's role in web development, and write your first "Hello World" program.
-                    </p>
-                    <div class="lesson-topics">
-                        <h4>Topics Covered:</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Programming Basics</span>
-                            <span class="topic-tag">JavaScript Overview</span>
-                            <span class="topic-tag">Console Output</span>
-                            <span class="topic-tag">DOM Interaction</span>
-                        </div>
-                    </div>
-                    <a href="lesson-01-introduction/index.html" class="lesson-link">Review Lesson</a>
-                </div>
-
-                <!-- Lesson 2 - Completed -->
-                <div class="lesson-card completed">
-                    <div class="lesson-number">2</div>
-                    <div class="lesson-status">✅</div>
-                    <h3 class="lesson-title">Variables and Data Types</h3>
-                    <p class="lesson-description">
-                        Master the art of storing information using variables. Learn about strings, numbers, and booleans with interactive examples.
-                    </p>
-                    <div class="lesson-topics">
-                        <h4>Topics Covered:</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Variable Declaration</span>
-                            <span class="topic-tag">Strings</span>
-                            <span class="topic-tag">Numbers</span>
-                            <span class="topic-tag">Booleans</span>
-                            <span class="topic-tag">Variable Usage</span>
-                        </div>
-                    </div>
-                    <a href="lesson-02-variables/index.html" class="lesson-link">Review Lesson</a>
-                </div>
-
-                <!-- Lesson 3 - Completed -->
-                <div class="lesson-card completed">
-                    <div class="lesson-number">3</div>
-                    <div class="lesson-status">✅</div>
-                    <h3 class="lesson-title">Basic Operations</h3>
-                    <p class="lesson-description">
-                        Learn to perform math operations, manipulate strings, and compare values. Build your first calculator application!
-                    </p>
-                    <div class="lesson-topics">
-                        <h4>Topics Covered:</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Math Operations</span>
-                            <span class="topic-tag">String Methods</span>
-                            <span class="topic-tag">Comparisons</span>
-                            <span class="topic-tag">Calculator Project</span>
-                        </div>
-                    </div>
-                    <a href="lesson-03-operations/index.html" class="lesson-link">Review Lesson</a>
-                </div>
-
-                <!-- Lesson 4 - Completed -->
-                <div class="lesson-card completed">
-                    <div class="lesson-number">4</div>
-                    <div class="lesson-status">✅</div>
-                    <h3 class="lesson-title">Making Decisions (Conditionals)</h3>
-                    <p class="lesson-description">
-                        Learn how to make your programs smart with if/else statements. Create programs that respond differently based on conditions.
-                    </p>
-                    <div class="lesson-topics">
-                        <h4>Topics Covered:</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">If Statements</span>
-                            <span class="topic-tag">Else Conditions</span>
-                            <span class="topic-tag">Logical Operators</span>
-                            <span class="topic-tag">Decision Trees</span>
-                        </div>
-                    </div>
-                    <a href="lesson-04-conditionals/index.html" class="lesson-link">Review Lesson</a>
-                </div>
-
-                <!-- Lesson 5 - Completed -->
-                <div class="lesson-card completed">
-                    <div class="lesson-number">5</div>
-                    <div class="lesson-status">✅</div>
-                    <h3 class="lesson-title">Repetition (Loops)</h3>
-                    <p class="lesson-description">
-                        Discover the power of loops to repeat actions efficiently. Learn for loops, while loops, and when to use each.
-                    </p>
-                    <div class="lesson-topics">
-                        <h4>Topics Covered:</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">For Loops</span>
-                            <span class="topic-tag">While Loops</span>
-                            <span class="topic-tag">Loop Control</span>
-                            <span class="topic-tag">Iteration Patterns</span>
-                        </div>
-                    </div>
-                    <a href="lesson-05-loops/index.html" class="lesson-link">Start Lesson</a>
-                </div>
-
-                <!-- Lesson 6 - Available -->
-                <div class="lesson-card completed">
-                    <div class="lesson-number">6</div>
-                    <div class="lesson-status">✅</div>
-                    <h3 class="lesson-title">Functions - Your First Tools</h3>
-                    <p class="lesson-description">
-                        Create reusable code blocks with functions. Learn parameters, return values, and how to organize your code effectively.
-                    </p>
-                    <div class="lesson-topics">
-                        <h4>Topics Covered:</h4>
-                        <div class="topics-list">
-                            <span class="topic-tag">Function Declaration</span>
-                            <span class="topic-tag">Parameters</span>
-                            <span class="topic-tag">Return Values</span>
-                            <span class="topic-tag">Code Organization</span>
-                        </div>
-                    </div>
-                    <a href="lesson-06-functions/index.html" class="lesson-link">Start Lesson</a>
-                </div>
+            <section class="lessons-grid" id="lessonsGrid">
+                <!-- Lessons will be loaded dynamically by JavaScript -->
             </section>
 
             <section class="info-section">
@@ -417,5 +298,233 @@
             <p>JavaScript Mastery Course - Your journey to web development excellence</p>
         </footer>
     </div>
+
+    <script>
+        // Lesson progression system - reads from localStorage and dynamically renders lessons
+        const lessons = [
+            {
+                id: 1,
+                title: 'Introduction to JavaScript',
+                description: 'Learn what programming is, understand JavaScript\'s role in web development, and write your first "Hello World" program.',
+                url: 'lesson-01-introduction/index.html',
+                topics: ['Programming Basics', 'JavaScript Overview', 'Console Output', 'DOM Interaction']
+            },
+            {
+                id: 2,
+                title: 'Variables and Data Types',
+                description: 'Master the art of storing information using variables. Learn about strings, numbers, and booleans with interactive examples.',
+                url: 'lesson-02-variables/index.html',
+                topics: ['Variable Declaration', 'Strings', 'Numbers', 'Booleans', 'Variable Usage']
+            },
+            {
+                id: 3,
+                title: 'Basic Operations',
+                description: 'Learn to perform math operations, manipulate strings, and compare values. Build your first calculator application!',
+                url: 'lesson-03-operations/index.html',
+                topics: ['Math Operations', 'String Methods', 'Comparisons', 'Calculator Project']
+            },
+            {
+                id: 4,
+                title: 'Making Decisions (Conditionals)',
+                description: 'Learn how to make your programs smart with if/else statements. Create programs that respond differently based on conditions.',
+                url: 'lesson-04-conditionals/index.html',
+                topics: ['If Statements', 'Else Conditions', 'Logical Operators', 'Decision Trees']
+            },
+            {
+                id: 5,
+                title: 'Repetition (Loops)',
+                description: 'Discover the power of loops to repeat actions efficiently. Learn for loops, while loops, and when to use each.',
+                url: 'lesson-05-loops/index.html',
+                topics: ['For Loops', 'While Loops', 'Loop Control', 'Iteration Patterns']
+            },
+            {
+                id: 6,
+                title: 'Functions - Your First Tools',
+                description: 'Create reusable code blocks with functions. Learn parameters, return values, and how to organize your code effectively.',
+                url: 'lesson-06-functions/index.html',
+                topics: ['Function Declaration', 'Parameters', 'Return Values', 'Code Organization']
+            }
+        ];
+
+        // Load lesson progress from localStorage
+        function loadLessonProgress() {
+            try {
+                const savedProgress = localStorage.getItem('lessonProgress');
+                return savedProgress ? JSON.parse(savedProgress) : {};
+            } catch (error) {
+                console.error('Error loading lesson progress:', error);
+                return {};
+            }
+        }
+
+        // Check if a lesson is completed
+        function isLessonCompleted(lessonId, progressData) {
+            const lessonKey = `lesson_${lessonId}`;
+            return progressData[lessonKey]?.completed || false;
+        }
+
+        // Check if a lesson is accessible (unlocked)
+        function isLessonAccessible(lessonId, progressData) {
+            // First lesson is always accessible
+            if (lessonId === 1) return true;
+            
+            // Other lessons require the previous lesson to be completed
+            return isLessonCompleted(lessonId - 1, progressData);
+        }
+
+        // Render lessons dynamically
+        function renderLessons() {
+            const lessonsGrid = document.getElementById('lessonsGrid');
+            const progressData = loadLessonProgress();
+            
+            console.log('📚 Loading lessons with progress data:', progressData);
+            
+            lessonsGrid.innerHTML = '';
+
+            lessons.forEach(lesson => {
+                const isCompleted = isLessonCompleted(lesson.id, progressData);
+                const isAccessible = isLessonAccessible(lesson.id, progressData);
+                
+                // Determine lesson state
+                let cardClass = 'lesson-card';
+                let statusIcon = '🔒';
+                let linkText = 'Locked';
+                let linkHref = '#';
+                let linkClass = 'lesson-link';
+
+                if (isCompleted) {
+                    cardClass += ' completed';
+                    statusIcon = '✅';
+                    linkText = 'Review Lesson';
+                    linkHref = lesson.url;
+                } else if (isAccessible) {
+                    cardClass += ' current';
+                    statusIcon = '📍';
+                    linkText = 'Start Lesson';
+                    linkHref = lesson.url;
+                } else {
+                    cardClass += ' locked';
+                    linkClass += ' disabled';
+                    statusIcon = '🔒';
+                    linkText = 'Locked';
+                }
+
+                // Create lesson card HTML
+                const lessonCard = document.createElement('div');
+                lessonCard.className = cardClass;
+                lessonCard.innerHTML = `
+                    <div class="lesson-number">${lesson.id}</div>
+                    <div class="lesson-status">${statusIcon}</div>
+                    <h3 class="lesson-title">${lesson.title}</h3>
+                    <p class="lesson-description">${lesson.description}</p>
+                    <div class="lesson-topics">
+                        <h4>Topics Covered:</h4>
+                        <div class="topics-list">
+                            ${lesson.topics.map(topic => `<span class="topic-tag">${topic}</span>`).join('')}
+                        </div>
+                    </div>
+                    <a href="${linkHref}" class="${linkClass}" ${!isAccessible ? 'onclick="return false;"' : ''}>${linkText}</a>
+                `;
+
+                lessonsGrid.appendChild(lessonCard);
+                
+                console.log(`Lesson ${lesson.id}: ${isCompleted ? 'Completed' : isAccessible ? 'Available' : 'Locked'}`);
+            });
+
+            // Update progress bar
+            updateProgressBar(progressData);
+        }
+
+        // Update the progress bar based on completion
+        function updateProgressBar(progressData) {
+            const completedCount = lessons.filter(lesson => isLessonCompleted(lesson.id, progressData)).length;
+            const progressPercentage = Math.round((completedCount / lessons.length) * 100);
+            
+            const progressBar = document.querySelector('.progress');
+            if (progressBar) {
+                progressBar.style.width = `${progressPercentage}%`;
+            }
+            
+            console.log(`📊 Progress: ${completedCount}/${lessons.length} lessons completed (${progressPercentage}%)`);
+        }
+
+        // Global functions for lesson completion (called from lesson pages)
+        function markLessonCompleted(lessonId, timeSpent = 30) {
+            try {
+                console.log(`🎉 Marking lesson ${lessonId} as completed...`);
+                
+                // Get current progress
+                const progressData = loadLessonProgress();
+                
+                // Update progress for this lesson
+                const lessonKey = `lesson_${lessonId}`;
+                progressData[lessonKey] = {
+                    completed: true,
+                    timeSpent: timeSpent,
+                    completedAt: new Date().toISOString()
+                };
+                
+                // Save back to localStorage
+                localStorage.setItem('lessonProgress', JSON.stringify(progressData));
+                
+                console.log(`✅ Lesson ${lessonId} marked as completed!`);
+                
+                // Re-render lessons to update UI
+                renderLessons();
+                
+                // Show success message
+                alert(`🎉 Lesson ${lessonId} completed! ${lessonId < lessons.length ? 'The next lesson is now unlocked.' : 'Congratulations on completing the course!'}`);
+                
+                return Promise.resolve();
+            } catch (error) {
+                console.error('Error marking lesson as completed:', error);
+                return Promise.reject(error);
+            }
+        }
+
+        function markLessonStarted(lessonId) {
+            try {
+                console.log(`📖 Marking lesson ${lessonId} as started...`);
+                
+                const progressData = loadLessonProgress();
+                const lessonKey = `lesson_${lessonId}`;
+                
+                // Only mark as started if not already in progress
+                if (!progressData[lessonKey]) {
+                    progressData[lessonKey] = {
+                        completed: false,
+                        timeSpent: 0,
+                        startedAt: new Date().toISOString()
+                    };
+                    
+                    localStorage.setItem('lessonProgress', JSON.stringify(progressData));
+                    console.log(`✅ Lesson ${lessonId} marked as started`);
+                }
+            } catch (error) {
+                console.error('Error marking lesson as started:', error);
+            }
+        }
+
+        // Make functions globally available for lesson pages
+        window.markLessonCompleted = markLessonCompleted;
+        window.markLessonStarted = markLessonStarted;
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 JavaScript Mastery Course - Initializing lesson progression system...');
+            renderLessons();
+            console.log('✅ Lesson progression system initialized!');
+        });
+
+        // Listen for storage changes (when lessons are completed in other tabs)
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'lessonProgress') {
+                console.log('📱 Progress updated in another tab, refreshing...');
+                renderLessons();
+            }
+        });
+
+        console.log('🎓 JavaScript Mastery Course - Dynamic lesson system loaded!');
+    </script>
 </body>
 </html>
