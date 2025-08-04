@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7: DOM Manipulation and Event Handling</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>🎯 DOM Manipulation & Event Handling</h1>
+            <p>Learn to make your web pages interactive with JavaScript!</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <button class="nav-btn active" data-exercise="exercise1">Exercise 1: Selection</button>
+            <button class="nav-btn" data-exercise="exercise2">Exercise 2: Counter</button>
+            <button class="nav-btn" data-exercise="exercise3">Exercise 3: Todo List</button>
+            <button class="nav-btn" data-exercise="exercise4">Exercise 4: Form Validation</button>
+            <button class="nav-btn" data-exercise="exercise5">Exercise 5: Image Gallery</button>
+            <button class="nav-btn" data-exercise="exercise6">Exercise 6: Calculator</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- Exercise 1: Element Selection and Modification -->
+            <section id="exercise1" class="exercise active">
+                <div class="exercise-header">
+                    <h2>Exercise 1: Element Selection and Modification</h2>
+                    <p>Learn how to find and modify elements on the page</p>
+                </div>
+
+                <div class="exercise-content">
+                    <div class="demo-area">
+                        <h3>Demo Elements</h3>
+                        <p id="demo-text">This text will change!</p>
+                        <div class="demo-box" id="demo-box">This box will change colors!</div>
+                        <img id="demo-image" src="https://via.placeholder.com/150x100/3498db/ffffff?text=Original" alt="Demo Image">
+                        <ul id="demo-list">
+                            <li class="list-item">Item 1</li>
+                            <li class="list-item">Item 2</li>
+                            <li class="list-item">Item 3</li>
+                        </ul>
+                    </div>
+
+                    <div class="controls">
+                        <h3>Try These Actions</h3>
+                        <div class="button-group">
+                            <button id="change-text-btn">Change Text</button>
+                            <button id="change-color-btn">Change Box Color</button>
+                            <button id="change-image-btn">Change Image</button>
+                            <button id="highlight-items-btn">Highlight List Items</button>
+                            <button id="reset-demo-btn">Reset Demo</button>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h3>Code Examples</h3>
+                        <pre><code>// Select element by ID
+const textElement = document.getElementById('demo-text');
+
+// Change text content
+textElement.textContent = 'New text content!';
+
+// Select elements by class
+const listItems = document.querySelectorAll('.list-item');
+
+// Loop through and modify each item
+listItems.forEach(item => {
+    item.style.backgroundColor = 'yellow';
+});</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise 2: Interactive Counter -->
+            <section id="exercise2" class="exercise">
+                <div class="exercise-header">
+                    <h2>Exercise 2: Interactive Counter</h2>
+                    <p>Build a counter with increment and decrement buttons</p>
+                </div>
+
+                <div class="exercise-content">
+                    <div class="counter-container">
+                        <h3>Counter App</h3>
+                        <div class="counter-display">
+                            <span id="counter-value">0</span>
+                        </div>
+                        <div class="counter-controls">
+                            <button id="decrement-btn" class="counter-btn">-</button>
+                            <button id="increment-btn" class="counter-btn">+</button>
+                            <button id="reset-counter-btn" class="counter-btn reset">Reset</button>
+                        </div>
+                        <div class="counter-info">
+                            <p>Current value: <span id="counter-info">0</span></p>
+                            <p>Total clicks: <span id="click-count">0</span></p>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h3>Your Task</h3>
+                        <pre><code>// TODO: Add event listeners to the buttons
+// 1. Get references to the buttons and display elements
+// 2. Add click event listeners
+// 3. Update the counter value
+// 4. Update the display
+
+const incrementBtn = document.getElementById('increment-btn');
+const counterValue = document.getElementById('counter-value');
+
+incrementBtn.addEventListener('click', function() {
+    // Your code here
+});</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise 3: Dynamic Todo List -->
+            <section id="exercise3" class="exercise">
+                <div class="exercise-header">
+                    <h2>Exercise 3: Dynamic Todo List</h2>
+                    <p>Create, complete, and delete todo items dynamically</p>
+                </div>
+
+                <div class="exercise-content">
+                    <div class="todo-container">
+                        <h3>My Todo List</h3>
+                        <div class="todo-input-section">
+                            <input type="text" id="todo-input" placeholder="Enter a new todo item...">
+                            <button id="add-todo-btn">Add Todo</button>
+                        </div>
+                        <div class="todo-stats">
+                            <span>Total: <span id="total-todos">0</span></span>
+                            <span>Completed: <span id="completed-todos">0</span></span>
+                            <span>Remaining: <span id="remaining-todos">0</span></span>
+                        </div>
+                        <ul id="todo-list" class="todo-list">
+                            <!-- Todo items will be added here dynamically -->
+                        </ul>
+                        <div class="todo-actions">
+                            <button id="clear-completed-btn">Clear Completed</button>
+                            <button id="clear-all-btn">Clear All</button>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h3>Your Task</h3>
+                        <pre><code>// TODO: Implement todo list functionality
+// 1. Add new todos when button is clicked
+// 2. Mark todos as complete when clicked
+// 3. Delete todos when delete button is clicked
+// 4. Update statistics
+
+function addTodo() {
+    const input = document.getElementById('todo-input');
+    const todoText = input.value.trim();
+    
+    if (todoText === '') return;
+    
+    // Create new todo item
+    const li = document.createElement('li');
+    // Add your code here
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise 4: Form Validation -->
+            <section id="exercise4" class="exercise">
+                <div class="exercise-header">
+                    <h2>Exercise 4: Form Validation</h2>
+                    <p>Create a form with real-time validation and feedback</p>
+                </div>
+
+                <div class="exercise-content">
+                    <div class="form-container">
+                        <h3>Registration Form</h3>
+                        <form id="registration-form" class="registration-form">
+                            <div class="form-group">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" required>
+                                <div class="error-message" id="username-error"></div>
+                                <div class="success-message" id="username-success"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" required>
+                                <div class="error-message" id="email-error"></div>
+                                <div class="success-message" id="email-success"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" required>
+                                <div class="error-message" id="password-error"></div>
+                                <div class="success-message" id="password-success"></div>
+                                <div class="password-strength">
+                                    <div class="strength-bar" id="strength-bar"></div>
+                                    <span id="strength-text">Enter password</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="confirm-password">Confirm Password:</label>
+                                <input type="password" id="confirm-password" name="confirm-password" required>
+                                <div class="error-message" id="confirm-password-error"></div>
+                                <div class="success-message" id="confirm-password-success"></div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="age">Age:</label>
+                                <input type="number" id="age" name="age" min="13" max="120" required>
+                                <div class="error-message" id="age-error"></div>
+                                <div class="success-message" id="age-success"></div>
+                            </div>
+
+                            <button type="submit" id="submit-btn" disabled>Register</button>
+                        </form>
+
+                        <div id="form-result" class="form-result"></div>
+                    </div>
+
+                    <div class="code-example">
+                        <h3>Your Task</h3>
+                        <pre><code>// TODO: Implement form validation
+// 1. Validate each field as user types
+// 2. Show error/success messages
+// 3. Enable submit button only when form is valid
+// 4. Prevent submission if form is invalid
+
+function validateUsername(username) {
+    if (username.length < 3) {
+        return 'Username must be at least 3 characters';
+    }
+    if (username.length > 20) {
+        return 'Username must be less than 20 characters';
+    }
+    return null; // No error
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise 5: Image Gallery -->
+            <section id="exercise5" class="exercise">
+                <div class="exercise-header">
+                    <h2>Exercise 5: Image Gallery</h2>
+                    <p>Build an interactive image gallery with navigation</p>
+                </div>
+
+                <div class="exercise-content">
+                    <div class="gallery-container">
+                        <h3>Photo Gallery</h3>
+                        <div class="gallery-main">
+                            <button id="prev-btn" class="gallery-nav-btn">❮</button>
+                            <div class="gallery-display">
+                                <img id="gallery-image" src="https://via.placeholder.com/400x300/e74c3c/ffffff?text=Image+1" alt="Gallery Image">
+                                <div class="gallery-info">
+                                    <h4 id="image-title">Beautiful Landscape</h4>
+                                    <p id="image-description">A stunning view of nature's beauty</p>
+                                    <span id="image-counter">1 / 6</span>
+                                </div>
+                            </div>
+                            <button id="next-btn" class="gallery-nav-btn">❯</button>
+                        </div>
+                        <div class="gallery-thumbnails" id="gallery-thumbnails">
+                            <!-- Thumbnails will be generated here -->
+                        </div>
+                        <div class="gallery-controls">
+                            <button id="play-slideshow-btn">Play Slideshow</button>
+                            <button id="stop-slideshow-btn" disabled>Stop Slideshow</button>
+                            <button id="random-image-btn">Random Image</button>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h3>Your Task</h3>
+                        <pre><code>// TODO: Implement gallery functionality
+// 1. Navigate between images with prev/next buttons
+// 2. Click thumbnails to jump to specific images
+// 3. Implement slideshow functionality
+// 4. Add random image selection
+
+const images = [
+    {
+        src: 'https://via.placeholder.com/400x300/e74c3c/ffffff?text=Image+1',
+        title: 'Beautiful Landscape',
+        description: 'A stunning view of nature\'s beauty'
+    },
+    // Add more images...
+];
+
+let currentImageIndex = 0;</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Exercise 6: Mini Calculator -->
+            <section id="exercise6" class="exercise">
+                <div class="exercise-header">
+                    <h2>Exercise 6: Mini Calculator</h2>
+                    <p>Build a functional calculator with button interactions</p>
+                </div>
+
+                <div class="exercise-content">
+                    <div class="calculator-container">
+                        <h3>Calculator</h3>
+                        <div class="calculator">
+                            <div class="calculator-display">
+                                <div id="calc-previous" class="calc-previous"></div>
+                                <div id="calc-current" class="calc-current">0</div>
+                            </div>
+                            <div class="calculator-buttons">
+                                <button class="calc-btn calc-btn-clear" id="calc-clear">C</button>
+                                <button class="calc-btn calc-btn-clear" id="calc-delete">⌫</button>
+                                <button class="calc-btn calc-btn-operator" data-operator="÷">÷</button>
+                                <button class="calc-btn calc-btn-operator" data-operator="×">×</button>
+                                
+                                <button class="calc-btn calc-btn-number" data-number="7">7</button>
+                                <button class="calc-btn calc-btn-number" data-number="8">8</button>
+                                <button class="calc-btn calc-btn-number" data-number="9">9</button>
+                                <button class="calc-btn calc-btn-operator" data-operator="-">-</button>
+                                
+                                <button class="calc-btn calc-btn-number" data-number="4">4</button>
+                                <button class="calc-btn calc-btn-number" data-number="5">5</button>
+                                <button class="calc-btn calc-btn-number" data-number="6">6</button>
+                                <button class="calc-btn calc-btn-operator" data-operator="+">+</button>
+                                
+                                <button class="calc-btn calc-btn-number" data-number="1">1</button>
+                                <button class="calc-btn calc-btn-number" data-number="2">2</button>
+                                <button class="calc-btn calc-btn-number" data-number="3">3</button>
+                                <button class="calc-btn calc-btn-equals" id="calc-equals" rowspan="2">=</button>
+                                
+                                <button class="calc-btn calc-btn-number calc-btn-zero" data-number="0">0</button>
+                                <button class="calc-btn calc-btn-number" data-number=".">.</button>
+                            </div>
+                        </div>
+                        <div class="calculator-history">
+                            <h4>History</h4>
+                            <ul id="calc-history" class="calc-history-list">
+                                <!-- Calculation history will appear here -->
+                            </ul>
+                            <button id="clear-history-btn">Clear History</button>
+                        </div>
+                    </div>
+
+                    <div class="code-example">
+                        <h3>Your Task</h3>
+                        <pre><code>// TODO: Implement calculator functionality
+// 1. Handle number button clicks
+// 2. Handle operator button clicks
+// 3. Perform calculations when equals is pressed
+// 4. Handle clear and delete operations
+// 5. Keep track of calculation history
+
+let currentInput = '0';
+let previousInput = '';
+let operator = null;
+
+function updateDisplay() {
+    document.getElementById('calc-current').textContent = currentInput;
+    document.getElementById('calc-previous').textContent = previousInput;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 JavaScript Lessons - DOM Manipulation & Event Handling</p>
+            <p>Practice makes perfect! Keep experimenting with the code.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
