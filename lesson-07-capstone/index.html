@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 7: Personal Finance Tracker - Capstone Project</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .project-overview {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .starter-card .card-icon {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .solution-card .card-icon {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+        }
+
+        .docs-card .card-icon {
+            background: linear-gradient(135deg, #FF9800, #F57C00);
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .project-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .features li {
+            padding: 0.25rem 0;
+            color: #555;
+        }
+
+        .features li:before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .beginner {
+            background: #E8F5E8;
+            color: #2E7D32;
+        }
+
+        .advanced {
+            background: #E3F2FD;
+            color: #1565C0;
+        }
+
+        .reference {
+            background: #FFF3E0;
+            color: #E65100;
+        }
+
+        .getting-started {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .getting-started h2 {
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            list-style: none;
+            counter-reset: step-counter;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            padding-left: 3rem;
+            position: relative;
+        }
+
+        .steps li:before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💰 Personal Finance Tracker</h1>
+            <p>Capstone Project - JavaScript Fundamentals Course</p>
+        </div>
+
+        <div class="project-overview">
+            <h2>🎯 Project Overview</h2>
+            <p>Welcome to your capstone project! This comprehensive challenge will test everything you've learned in the previous 6 lessons while building a real-world application that you can actually use in your daily life.</p>
+            
+            <p>You'll build a complete <strong>Personal Finance Tracker & Budget Analyzer</strong> - a web application that helps users manage their money, track expenses, set budgets, and make informed financial decisions.</p>
+
+            <h3>🚀 What You'll Learn</h3>
+            <div class="tech-stack">
+                <span class="tech-item">Variables & Data Types</span>
+                <span class="tech-item">Functions & Scope</span>
+                <span class="tech-item">Loops & Iteration</span>
+                <span class="tech-item">Conditionals & Logic</span>
+                <span class="tech-item">DOM Manipulation</span>
+                <span class="tech-item">Event Handling</span>
+                <span class="tech-item">Local Storage</span>
+                <span class="tech-item">Chart.js Integration</span>
+                <span class="tech-item">Responsive Design</span>
+                <span class="tech-item">Project Architecture</span>
+            </div>
+        </div>
+
+        <div class="project-grid">
+            <a href="starter-template/index.html" class="project-card starter-card">
+                <div class="card-icon">
+                    <i class="fas fa-play"></i>
+                </div>
+                <h3>🚀 Starter Template</h3>
+                <p>Begin your journey with a guided template that includes structure, styling, and helpful TODO comments to guide your development.</p>
+                
+                <ul class="features">
+                    <li>Complete HTML structure</li>
+                    <li>Professional CSS styling</li>
+                    <li>JavaScript skeleton with TODOs</li>
+                    <li>Step-by-step guidance</li>
+                    <li>Form validation examples</li>
+                </ul>
+                
+                <span class="difficulty beginner">Beginner Friendly</span>
+            </a>
+
+            <a href="solution/index.html" class="project-card solution-card">
+                <div class="card-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>🏆 Complete Solution</h3>
+                <p>Explore the full implementation with advanced features, professional UI/UX, and best practices for reference and inspiration.</p>
+                
+                <ul class="features">
+                    <li>Full feature implementation</li>
+                    <li>Advanced charts & analytics</li>
+                    <li>Goal tracking system</li>
+                    <li>Export functionality</li>
+                    <li>Professional design</li>
+                </ul>
+                
+                <span class="difficulty advanced">Advanced Reference</span>
+            </a>
+
+            <a href="README.md" class="project-card docs-card">
+                <div class="card-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>📚 Documentation</h3>
+                <p>Comprehensive guide with detailed instructions, learning objectives, assessment criteria, and extension challenges.</p>
+                
+                <ul class="features">
+                    <li>Detailed requirements</li>
+                    <li>Phase-by-phase development</li>
+                    <li>Assessment rubric</li>
+                    <li>Extension challenges</li>
+                    <li>Troubleshooting guide</li>
+                </ul>
+                
+                <span class="difficulty reference">Essential Reading</span>
+            </a>
+        </div>
+
+        <div class="getting-started">
+            <h2>🎮 Getting Started</h2>
+            <p>Follow these steps to begin your capstone project:</p>
+            
+            <ol class="steps">
+                <li><strong>Read the Documentation:</strong> Start with the README.md file to understand the project requirements, learning objectives, and assessment criteria.</li>
+                
+                <li><strong>Choose Your Path:</strong> 
+                    <br>• <strong>Guided Approach:</strong> Use the starter template with TODO comments
+                    <br>• <strong>From Scratch:</strong> Build everything yourself using the requirements
+                    <br>• <strong>Hybrid:</strong> Start with the template and add your own features
+                </li>
+                
+                <li><strong>Set Up Your Environment:</strong> Ensure you have a code editor (VS Code recommended) and a modern web browser with developer tools.</li>
+                
+                <li><strong>Plan Your Development:</strong> Break the project into phases and tackle one feature at a time. Start with basic functionality before adding advanced features.</li>
+                
+                <li><strong>Test Frequently:</strong> Use the browser's developer tools to debug and test your application as you build each feature.</li>
+                
+                <li><strong>Iterate and Improve:</strong> Once you have basic functionality working, add styling, improve user experience, and implement advanced features.</li>
+            </ol>
+
+            <h3>💡 Pro Tips</h3>
+            <ul style="list-style: none; margin-top: 1rem;">
+                <li>✨ Start simple and build incrementally</li>
+                <li>🔍 Use console.log() to debug your JavaScript</li>
+                <li>📱 Test on different screen sizes</li>
+                <li>💾 Save your work frequently</li>
+                <li>🎨 Customize the design to make it your own</li>
+                <li>🚀 Add features beyond the requirements to stand out</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+</html>

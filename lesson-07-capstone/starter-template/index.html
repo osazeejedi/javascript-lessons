@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js for creating beautiful charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-wallet"></i>
+                Finance Tracker
+            </h1>
+            <nav class="nav">
+                <button class="nav-btn active" data-section="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    Dashboard
+                </button>
+                <button class="nav-btn" data-section="transactions">
+                    <i class="fas fa-list"></i>
+                    Transactions
+                </button>
+                <button class="nav-btn" data-section="budgets">
+                    <i class="fas fa-target"></i>
+                    Budgets
+                </button>
+                <button class="nav-btn" data-section="analytics">
+                    <i class="fas fa-chart-line"></i>
+                    Analytics
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <h2 class="section-title">Financial Dashboard</h2>
+                
+                <!-- Summary Cards -->
+                <div class="summary-cards">
+                    <div class="card income-card">
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Income</h3>
+                            <p class="amount" id="total-income">$0.00</p>
+                            <span class="period">This month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card expense-card">
+                        <div class="card-icon">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Expenses</h3>
+                            <p class="amount" id="total-expenses">$0.00</p>
+                            <span class="period">This month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card balance-card">
+                        <div class="card-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Net Balance</h3>
+                            <p class="amount" id="net-balance">$0.00</p>
+                            <span class="period">This month</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card health-card">
+                        <div class="card-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Financial Health</h3>
+                            <p class="score" id="health-score">--</p>
+                            <span class="period">Score out of 100</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-buttons">
+                        <button class="action-btn income-btn" onclick="showAddTransaction('income')">
+                            <i class="fas fa-plus"></i>
+                            Add Income
+                        </button>
+                        <button class="action-btn expense-btn" onclick="showAddTransaction('expense')">
+                            <i class="fas fa-minus"></i>
+                            Add Expense
+                        </button>
+                        <button class="action-btn budget-btn" onclick="showSection('budgets')">
+                            <i class="fas fa-target"></i>
+                            Set Budget
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="recent-transactions">
+                    <h3>Recent Transactions</h3>
+                    <div id="recent-list" class="transaction-list">
+                        <!-- Recent transactions will be displayed here -->
+                        <p class="empty-state">No transactions yet. Add your first transaction to get started!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Transactions Section -->
+            <section id="transactions" class="section">
+                <h2 class="section-title">Transaction Management</h2>
+                
+                <!-- Add Transaction Form -->
+                <div class="transaction-form-container">
+                    <h3>Add New Transaction</h3>
+                    <form id="transaction-form" class="transaction-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="transaction-type">Type</label>
+                                <select id="transaction-type" required>
+                                    <option value="">Select type</option>
+                                    <option value="income">Income</option>
+                                    <option value="expense">Expense</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transaction-amount">Amount ($)</label>
+                                <input type="number" id="transaction-amount" step="0.01" min="0" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="transaction-category">Category</label>
+                                <select id="transaction-category" required>
+                                    <option value="">Select category</option>
+                                    <!-- Categories will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="transaction-date">Date</label>
+                                <input type="date" id="transaction-date" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="transaction-description">Description</label>
+                            <input type="text" id="transaction-description" placeholder="Enter description" required>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-plus"></i>
+                            Add Transaction
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Transaction Filters -->
+                <div class="transaction-filters">
+                    <h3>Filter Transactions</h3>
+                    <div class="filter-controls">
+                        <select id="filter-type">
+                            <option value="">All Types</option>
+                            <option value="income">Income Only</option>
+                            <option value="expense">Expenses Only</option>
+                        </select>
+                        
+                        <select id="filter-category">
+                            <option value="">All Categories</option>
+                            <!-- Categories will be populated by JavaScript -->
+                        </select>
+                        
+                        <input type="month" id="filter-month" placeholder="Filter by month">
+                        
+                        <button id="clear-filters" class="clear-btn">Clear Filters</button>
+                    </div>
+                </div>
+
+                <!-- All Transactions List -->
+                <div class="all-transactions">
+                    <h3>All Transactions</h3>
+                    <div id="all-transactions-list" class="transaction-list">
+                        <!-- All transactions will be displayed here -->
+                        <p class="empty-state">No transactions found. Add some transactions to see them here!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Budgets Section -->
+            <section id="budgets" class="section">
+                <h2 class="section-title">Budget Management</h2>
+                
+                <!-- Budget Setup Form -->
+                <div class="budget-form-container">
+                    <h3>Set Monthly Budget</h3>
+                    <form id="budget-form" class="budget-form">
+                        <div class="form-group">
+                            <label for="budget-month">Month</label>
+                            <input type="month" id="budget-month" required>
+                        </div>
+                        
+                        <div id="budget-categories" class="budget-categories">
+                            <!-- Budget categories will be populated by JavaScript -->
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-save"></i>
+                            Save Budget
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Current Budget Status -->
+                <div class="budget-status">
+                    <h3>Current Month Budget</h3>
+                    <div id="budget-progress" class="budget-progress">
+                        <!-- Budget progress will be displayed here -->
+                        <p class="empty-state">Set up your first budget to track your spending!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="section">
+                <h2 class="section-title">Financial Analytics</h2>
+                
+                <!-- Chart Controls -->
+                <div class="chart-controls">
+                    <select id="chart-period">
+                        <option value="current">Current Month</option>
+                        <option value="last3">Last 3 Months</option>
+                        <option value="last6">Last 6 Months</option>
+                        <option value="year">This Year</option>
+                    </select>
+                </div>
+
+                <!-- Charts Container -->
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <h3>Spending by Category</h3>
+                        <canvas id="category-chart"></canvas>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>Income vs Expenses</h3>
+                        <canvas id="income-expense-chart"></canvas>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>Monthly Trends</h3>
+                        <canvas id="trend-chart"></canvas>
+                    </div>
+                    
+                    <div class="chart-card">
+                        <h3>Budget Performance</h3>
+                        <canvas id="budget-chart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Financial Insights -->
+                <div class="insights">
+                    <h3>Financial Insights</h3>
+                    <div id="insights-list" class="insights-list">
+                        <!-- Insights will be generated by JavaScript -->
+                        <p class="empty-state">Add more transactions to see personalized insights!</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Modal for Transaction Details/Editing -->
+    <div id="transaction-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Transaction Details</h3>
+            <div id="modal-body">
+                <!-- Transaction details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Messages -->
+    <div id="message-container" class="message-container">
+        <!-- Messages will be displayed here -->
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
